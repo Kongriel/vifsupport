@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { supabase } from "/lib/supabaseClient";
 import Image from "next/image";
 import confetti from "canvas-confetti";
-import { toast } from "react-toastify";
 
 export default function TaskDetail({ isLoggedIn }) {
   const router = useRouter();
