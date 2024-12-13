@@ -179,17 +179,6 @@ export default function TaskDetail({ isLoggedIn }) {
         startVelocity: -35,
       });
 
-      toast.success("Tillykke, du er en helt!", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-
       // Refresh the task data
       fetchTaskData();
 
