@@ -24,7 +24,7 @@ export default function Home() {
       </Head>
       <div className="flex min-h-screen md:pl-6 md:mt-16 md:pr-6 flex-col md:flex-row items-center justify-center  ">
         {/* Billede */}
-        <div className="w-full md:-mt-4 -mt-24  md:w-1/2">
+        <div className="w-full md:-mt-4 -mt-16  md:w-1/2">
           <Image src="/sforside.jpg" alt="VIF Gymnastik" width={500} height={500} className="object-cover rounded-lg w-full h-auto" />
         </div>
 
