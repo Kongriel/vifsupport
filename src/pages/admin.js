@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { supabase } from "/lib/supabaseClient";
+import Head from "next/head";
 
 export default function Admin() {
   const router = useRouter();
@@ -687,131 +688,137 @@ export default function Admin() {
   }
 
   return (
-    <div className="p-8 justify-evenly mt-24 md:flex min-h-screen">
-      <div className="">
-        <h1 className="text-3xl text-center font-bold mb-6 text-gray-700">{id ? "Rediger Opgave" : "Tilføj en opgave i et Event"}</h1>
-        <div className="flex items-center justify-center">
-          <form onSubmit={handleSubmit} className="bg-knap-10 border text-bono-10 border-gray-600 p-6 rounded w-full max-w-md">
-            {success && <p className="text-bono-10 mb-4">{success}</p>}
-            {error && <p className="text-red-500 mb-4">{error}</p>}
+    <>
+      <Head>
+        <title>Viffsupport Startside</title>
+        <meta name="description" content="Learn more about us on this page." />
+      </Head>
+      <div className="p-8 justify-evenly mt-24 md:flex min-h-screen">
+        <div className="">
+          <h1 className="text-3xl text-center font-bold mb-6 text-gray-700">{id ? "Rediger Opgave" : "Tilføj en opgave i et Event"}</h1>
+          <div className="flex items-center justify-center">
+            <form onSubmit={handleSubmit} className="bg-knap-10 border text-bono-10 border-gray-600 p-6 rounded w-full max-w-md">
+              {success && <p className="text-bono-10 mb-4">{success}</p>}
+              {error && <p className="text-red-500 mb-4">{error}</p>}
 
-            <label className="block text-bono-10 mb-4">
-              Vælg tabel:
-              <select
-                value={tableSelection}
-                onChange={(e) => {
-                  const selectedTable = e.target.value;
-                  console.log("Dropdown changed to:", selectedTable);
-                  setTableSelection(selectedTable);
-                }}
-                className="w-full border rounded p-2"
-              >
-                {tableOptions.map(({ tablename, friendly_name }) => (
-                  <option key={tablename} value={tablename}>
-                    {/* Vælg friendly_name hvis det findes, ellers brug tablename */}
-                    {friendly_name ? friendly_name : tablename}
-                  </option>
-                ))}
-              </select>
-            </label>
+              <label className="block text-bono-10 mb-4">
+                Vælg tabel:
+                <select
+                  value={tableSelection}
+                  onChange={(e) => {
+                    const selectedTable = e.target.value;
+                    console.log("Dropdown changed to:", selectedTable);
+                    setTableSelection(selectedTable);
+                  }}
+                  className="w-full border rounded p-2"
+                >
+                  {tableOptions.map(({ tablename, friendly_name }) => (
+                    <option key={tablename} value={tablename}>
+                      {/* Vælg friendly_name hvis det findes, ellers brug tablename */}
+                      {friendly_name ? friendly_name : tablename}
+                    </option>
+                  ))}
+                </select>
+              </label>
 
-            <label className="block text-bono-10 mb-4">
-              Titel:
-              <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="w-full bg-knap-10 border text-bono-10 border-gray-600 rounded p-2" required />
-            </label>
-            <label className="block text-bono-10 mb-4">
-              Kort Beskrivelse:
-              <textarea value={shortDescription} onChange={(e) => setShortDescription(e.target.value)} className="w-full bg-knap-10 border text-bono-10 border-gray-600 rounded" required />
-            </label>
-            <label className="block text-bono-10 mb-4">
-              Beskrivelse:
-              <textarea value={description} onChange={(e) => setDescription(e.target.value)} className="w-full bg-knap-10 border text-bono-10 border-gray-600 rounded" required />
-            </label>
-            <label className="block text-bono-10 mb-4">
-              Dato:
-              <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="w-full bg-knap-10 border text-bono-10 border-gray-600 rounded p-2" required />
-            </label>
-            <label className="block text-bono-10 mb-4">
-              Adresse:
-              <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} className="w-full bg-knap-10 border text-bono-10 border-gray-600 rounded p-2" required />
-            </label>
+              <label className="block text-bono-10 mb-4">
+                Titel:
+                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="w-full bg-knap-10 border text-bono-10 border-gray-600 rounded p-2" required />
+              </label>
+              <label className="block text-bono-10 mb-4">
+                Kort Beskrivelse:
+                <textarea value={shortDescription} onChange={(e) => setShortDescription(e.target.value)} className="w-full bg-knap-10 border text-bono-10 border-gray-600 rounded" required />
+              </label>
+              <label className="block text-bono-10 mb-4">
+                Beskrivelse:
+                <textarea value={description} onChange={(e) => setDescription(e.target.value)} className="w-full bg-knap-10 border text-bono-10 border-gray-600 rounded" required />
+              </label>
+              <label className="block text-bono-10 mb-4">
+                Dato:
+                <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="w-full bg-knap-10 border text-bono-10 border-gray-600 rounded p-2" required />
+              </label>
+              <label className="block text-bono-10 mb-4">
+                Adresse:
+                <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} className="w-full bg-knap-10 border text-bono-10 border-gray-600 rounded p-2" required />
+              </label>
 
-            <label className="block text-bono-10 mb-4">
-              Antal Frivillige:
-              <input type="number" value={neededVolunteers} onChange={(e) => setNeededVolunteers(Number(e.target.value))} className="w-full bg-knap-10 border text-bono-10 border-gray-600 rounded p-2" min="1" required />
-            </label>
+              <label className="block text-bono-10 mb-4">
+                Antal Frivillige:
+                <input type="number" value={neededVolunteers} onChange={(e) => setNeededVolunteers(Number(e.target.value))} className="w-full bg-knap-10 border text-bono-10 border-gray-600 rounded p-2" min="1" required />
+              </label>
 
-            <div className="mb-4">
-              <label className="block text-black mb-2">Tidsrum:</label>
-              <div className="grid gap-2 mb-2">
-                <input type="time" value={newStartTime} onChange={(e) => setNewStartTime(e.target.value)} className="bg-knap-10 border text-bono-10 border-gray-600 rounded p-2" />
-                <input type="time" value={newEndTime} onChange={(e) => setNewEndTime(e.target.value)} className="bg-knap-10 border text-bono-10 border-gray-600 rounded p-2" />
-                <input type="number" value={maxVolunteers} onChange={(e) => setMaxVolunteers(Number(e.target.value))} className="bg-knap-10 border text-bono-10 border-gray-600 rounded p-2" min="1" />
-                <button type="button" onClick={addTimeSlot} className="bg-blue-500 text-white px-4 rounded">
-                  Tilføj
-                </button>
+              <div className="mb-4">
+                <label className="block text-black mb-2">Tidsrum:</label>
+                <div className="grid gap-2 mb-2">
+                  <input type="time" value={newStartTime} onChange={(e) => setNewStartTime(e.target.value)} className="bg-knap-10 border text-bono-10 border-gray-600 rounded p-2" />
+                  <input type="time" value={newEndTime} onChange={(e) => setNewEndTime(e.target.value)} className="bg-knap-10 border text-bono-10 border-gray-600 rounded p-2" />
+                  <input type="number" value={maxVolunteers} onChange={(e) => setMaxVolunteers(Number(e.target.value))} className="bg-knap-10 border text-bono-10 border-gray-600 rounded p-2" min="1" />
+                  <button type="button" onClick={addTimeSlot} className="bg-blue-500 text-white px-4 rounded">
+                    Tilføj
+                  </button>
+                </div>
+                <ul>
+                  {timeSlots.map((slot, index) => (
+                    <li key={index} className="flex justify-between items-center text-gray-700 mb-2">
+                      {slot.start_time} - {slot.end_time} ({slot.max_volunteers} frivillige)
+                      <button type="button" onClick={() => deleteTimeSlot(slot.id)} className="text-red-500 ml-4">
+                        Slet
+                      </button>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul>
-                {timeSlots.map((slot, index) => (
-                  <li key={index} className="flex justify-between items-center text-gray-700 mb-2">
-                    {slot.start_time} - {slot.end_time} ({slot.max_volunteers} frivillige)
-                    <button type="button" onClick={() => deleteTimeSlot(slot.id)} className="text-red-500 ml-4">
-                      Slet
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
 
-            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded w-full">
-              {id ? "Opdater Opgave" : "Opret Opgave"}
+              <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded w-full">
+                {id ? "Opdater Opgave" : "Opret Opgave"}
+              </button>
+            </form>
+          </div>
+        </div>
+        <div>
+          <h2 className="text-3xl font-semibold text-bono-10 mb-6">Opret et nyt Event</h2>
+          <form className="bg-knap-10 border text-bono-10 w-96 h-fit border-gray-600 p-6 rounded">
+            <label className="block text-gray-700 mb-4">
+              Eventnavn:
+              <input type="text" value={newEventName} onChange={(e) => setNewEventName(e.target.value)} className="w-full border rounded p-2" placeholder="Skriv eventnavn" required />
+            </label>
+            <label className="block text-gray-700 mb-4">
+              Eventdato:
+              <input type="date" value={newEventDate} onChange={(e) => setNewEventDate(e.target.value)} className="w-full border rounded p-2" required />
+            </label>
+            <label className="block text-gray-700 mb-4">
+              Kort Eventbeskrivelse:
+              <textarea value={newEventDescription} onChange={(e) => setNewEventDescription(e.target.value)} className="w-full border rounded p-2" placeholder="Beskrivelse af event" required />
+            </label>
+            <label className="block text-gray-700 mb-4">
+              Lang Eventbeskrivelse:
+              <textarea value={newEventlongDescription} onChange={(e) => setNewEventlongDescription(e.target.value)} className="w-full border rounded p-2" placeholder="Beskrivelse af event" required />
+            </label>
+            <label className="block text-gray-700 mb-4">
+              Adresse:
+              <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} className="w-full border rounded p-2" placeholder="Indtast eventadresse" required />
+            </label>
+
+            <label className="block text-gray-700 mb-4">
+              Billede:
+              <input type="file" accept="image/*" onChange={handleImageChange} className="w-full border rounded p-2" required />
+            </label>
+
+            {/* Display URL of the uploaded image */}
+            {newEventImageUrl && <p className="text-gray-500 mt-2">Billed-URL: {newEventImageUrl}</p>}
+
+            <button type="button" onClick={handleUploadImage} className="btn btn-primary mt-2">
+              Upload billede
             </button>
+            <button type="button" onClick={editMode ? saveEventChanges : createNewEventTables} className="btn btn-primary mt-2">
+              {editMode ? "Gem Ændringer" : "Opret Event"}
+            </button>
+
+            {success && <p className="text-bono-10 mt-4">{success}</p>}
+            {error && <p className="text-red-500 mt-4">{error}</p>}
           </form>
         </div>
       </div>
-      <div>
-        <h2 className="text-3xl font-semibold text-bono-10 mb-6">Opret et nyt Event</h2>
-        <form className="bg-knap-10 border text-bono-10 w-96 h-fit border-gray-600 p-6 rounded">
-          <label className="block text-gray-700 mb-4">
-            Eventnavn:
-            <input type="text" value={newEventName} onChange={(e) => setNewEventName(e.target.value)} className="w-full border rounded p-2" placeholder="Skriv eventnavn" required />
-          </label>
-          <label className="block text-gray-700 mb-4">
-            Eventdato:
-            <input type="date" value={newEventDate} onChange={(e) => setNewEventDate(e.target.value)} className="w-full border rounded p-2" required />
-          </label>
-          <label className="block text-gray-700 mb-4">
-            Kort Eventbeskrivelse:
-            <textarea value={newEventDescription} onChange={(e) => setNewEventDescription(e.target.value)} className="w-full border rounded p-2" placeholder="Beskrivelse af event" required />
-          </label>
-          <label className="block text-gray-700 mb-4">
-            Lang Eventbeskrivelse:
-            <textarea value={newEventlongDescription} onChange={(e) => setNewEventlongDescription(e.target.value)} className="w-full border rounded p-2" placeholder="Beskrivelse af event" required />
-          </label>
-          <label className="block text-gray-700 mb-4">
-            Adresse:
-            <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} className="w-full border rounded p-2" placeholder="Indtast eventadresse" required />
-          </label>
-
-          <label className="block text-gray-700 mb-4">
-            Billede:
-            <input type="file" accept="image/*" onChange={handleImageChange} className="w-full border rounded p-2" required />
-          </label>
-
-          {/* Display URL of the uploaded image */}
-          {newEventImageUrl && <p className="text-gray-500 mt-2">Billed-URL: {newEventImageUrl}</p>}
-
-          <button type="button" onClick={handleUploadImage} className="btn btn-primary mt-2">
-            Upload billede
-          </button>
-          <button type="button" onClick={editMode ? saveEventChanges : createNewEventTables} className="btn btn-primary mt-2">
-            {editMode ? "Gem Ændringer" : "Opret Event"}
-          </button>
-
-          {success && <p className="text-bono-10 mt-4">{success}</p>}
-          {error && <p className="text-red-500 mt-4">{error}</p>}
-        </form>
-      </div>
-    </div>
+    </>
   );
 }

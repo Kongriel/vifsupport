@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { supabase } from "/lib/supabaseClient";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 export default function EventPage() {
   const [events, setEvents] = useState([]);
@@ -235,6 +236,10 @@ export default function EventPage() {
           }
         }
       `}</style>
+      <Head>
+        <title>Viffsupport Startside</title>
+        <meta name="description" content="Learn more about us on this page." />
+      </Head>
       <div className="min-h-screen mt-20 md:px-12 px-4 overflow-x-hidden">
         <div className="flex flex-col items-center mt-24 justify-center">
           <h1 className="text-customClamp mt-4 font-bebas font-bold md:text-center text-bono-10 mb-16 md:mb-2">{targetDays !== null ? `${daysUntilNextEvent} Dage Til Næste Event!` : "Velkommen til Eventlisten"}</h1>

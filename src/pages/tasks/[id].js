@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { supabase } from "/lib/supabaseClient";
 import Image from "next/image";
 import confetti from "canvas-confetti";
+import Head from "next/head";
 
 export default function TaskDetail({ isLoggedIn }) {
   const router = useRouter();
@@ -271,7 +272,10 @@ export default function TaskDetail({ isLoggedIn }) {
           }
         }
       `}</style>
-
+      <Head>
+        <title>Opgavedetaljer</title>
+        <meta name="description" content="Learn more about us on this page." />
+      </Head>
       <div className="md:p-16 mt-32 md:mt-12 min-h-screen ">
         <h1 className="text-5xl text-center mt-7 font-bebas font-bold text-bono-10 md:mb-16 md:mt-8 mb-3">Opgave Detaljer</h1>
         <div className="md:flex justify-evenly">

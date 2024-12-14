@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { supabase } from "/lib/supabaseClient";
 import Image from "next/image";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function Tasks() {
   const [tasks, setTasks] = useState([]);
@@ -39,16 +40,16 @@ export default function Tasks() {
     const [draggedTask] = reorderedTasks.splice(draggedTaskIndex, 1);
     reorderedTasks.splice(droppedIndex, 0, draggedTask);
 
-    // Opdater `order` for hver opgave
     const updatedTasks = reorderedTasks.map((task, index) => ({
       ...task,
       order: index,
     }));
 
+    // Opdater lokalt state
     setTasks(updatedTasks);
 
+    // Opdater rækkefølgen i databasen
     try {
-      // Opdater `order` i databasen
       await Promise.all(updatedTasks.map((task) => supabase.from(eventInfo.table_name).update({ order: task.order }).eq("id", task.id)));
       console.log("Rækkefølgen er gemt i databasen.");
     } catch (error) {
@@ -58,10 +59,10 @@ export default function Tasks() {
 
   const saveTaskOrder = async (updatedTasks) => {
     try {
-      for (const task of updatedTasks) {
-        await supabase.from(eventInfo.table_name).update({ order: task.order }).eq("id", task.id);
-      }
-      console.log("Rækkefølgen er gemt i databasen.");
+      const updatePromises = updatedTasks.map((task) => supabase.from(eventInfo.table_name).update({ order: task.order }).eq("id", task.id));
+
+      const results = await Promise.all(updatePromises);
+      console.log("Rækkefølgen er gemt i databasen.", results);
     } catch (error) {
       console.error("Fejl ved gemning af rækkefølge:", error);
     }
@@ -324,6 +325,10 @@ export default function Tasks() {
           }
         }
       `}</style>
+      <Head>
+        <title>Event opgaver</title>
+        <meta name="description" content="Learn more about us on this page." />
+      </Head>
 
       <div className="md:flex md:mt-32 items-center justify-center md:gap-12">
         <div className="p-4 pt-7 mt-16 md:mt-0  items-center flex justify-center">
