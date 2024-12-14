@@ -265,9 +265,9 @@ export default function EventPage() {
                     <p className="font-montserrat text-sm text-bono-10">{event.event_description}</p>
 
                     <Link href={`/events/${event.slug}`}>
-                      <button className="flex justify-center items-center relative md:w-full w-96 h-12 max-w-[400px] cursor-pointer">
+                      <button className="flex justify-center items-center relative md:w-full w-96 h-12 max-w-[400px] mt-1 cursor-pointer" aria-label="Læs Mere">
                         <div className="absolute flex bg-knap-10 justify-center items-center h-8 w-full text-sm rounded-xl border-2 hover:border-blue-600 border-gray-500"></div>
-                        <div className="absolute text-bono-10 hover:border-blue-600 text-sm">Læs Mere</div>
+                        <div className="absolute text-bono-10 hover:border-blue-600 text-base">Læs Mere</div>
                       </button>
                     </Link>
 

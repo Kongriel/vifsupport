@@ -19,7 +19,7 @@ module.exports = {
         "taupe-10": "#BBD4E0",
       },
       fontSize: {
-        customClamp: "clamp(2.625rem, 1.9038rem + 2.3077vw, 4.5rem);",
+        customClamp: "clamp(2rem, 1.4643rem + 2.1429vw, 3.875rem);",
         customClampMedium: "clamp(1.5rem, 1.0192rem + 1.5385vw, 2.75rem);",
       },
     },
