@@ -4,7 +4,7 @@ import Link from "next/link";
 const Socials = () => {
   return (
     <div className="socials-wrapper">
-      <div className="flex justify-center gap-2">
+      <div className="flex justify-center gap-5 mt-8 pb-4">
         <button onClick={() => (window.location.href = "https://www.facebook.com/ValbyIF")} className="button" aria-label="Besøg os på Facebook">
           <svg fill="#ffff" height="200px" width="200px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="-143 145 512 512" xmlSpace="preserve" className="facebook-icon">
             <g>

@@ -335,11 +335,10 @@ export default function Tasks() {
           <Image src={eventInfo.image_url || "/placeholder.jpg"} alt="Event Billede" width={400} height={300} className="rounded-xl  shadow-lg" />
         </div>
         <div className="p-7 -mb-8 text-left">
-          <p className="text-gray-700 font-bold md:text-lg pt-1 text-sm">{formatDate(eventInfo.event_date)}</p>
+          <p className="text-gray-700 font-bold md:text-lg pt-1 mb-2 text-sm">{formatDate(eventInfo.event_date)}</p>
           <h1 className="text-gray-700 mb-2 font-bold md:text-6xl text-5xl">{eventInfo.friendly_name}</h1>
 
-          <p className="text-bono-10 font-montserrat">{eventInfo.event_description}</p>
-          <p className="text-bono-10 mb-2 font-montserrat break-words max-w-[600px]">{eventInfo.event_longdescription}</p>
+          <p className="text-bono-10 mb-2 font-montserrat md:mt-3 break-words max-w-[600px]">{eventInfo.event_longdescription}</p>
           <p className="text-bono-10 mb-2">
             <strong> Addresse: {eventInfo.address}</strong>
           </p>
