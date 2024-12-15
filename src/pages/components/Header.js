@@ -78,7 +78,7 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
 
             {/* Navigation links */}
             <nav className="flex flex-col items-center space-y-4 py-7 px-6">
-              <Link href="/tasks" className="text-gray-300 py-1 text-4xl hover:text-blue-500" onClick={() => setMenuOpen(false)}>
+              <Link href="/event" className="text-gray-300 py-1 text-4xl hover:text-blue-500" onClick={() => setMenuOpen(false)}>
                 Opgaver
               </Link>
               <Link href="/about" className="text-gray-300 py-1 text-4xl hover:text-blue-500" onClick={() => setMenuOpen(false)}>

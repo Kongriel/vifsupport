@@ -349,7 +349,7 @@ export default function TaskDetail({ isLoggedIn }) {
               )}
               <div className="mb-4">
                 <label className="block text-gray-700 mb-2">Vælg Tidsrum:</label>
-                <select value={selectedTimeSlot} onChange={(e) => setSelectedTimeSlot(e.target.value)} className="block w-full text-gray-700 border rounded p-2" required>
+                <select value={selectedTimeSlot} onChange={(e) => setSelectedTimeSlot(e.target.value)} className="block w-full text-gray-700 border rounded p-2" aria-label="Vælg tidsrum" required>
                   <option value="">Vælg et tidsrum</option>
                   {timeSlots.map((slot) => (
                     <option key={slot.id} value={slot.id}>
