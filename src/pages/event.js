@@ -38,7 +38,7 @@ export default function EventPage() {
 
         let selectedEvents = [];
         for (const table of opgaveTables) {
-          const { data: eventsData, error: eventsError } = await supabase.from(table).select("id, friendly_name, event_date, image_url, event_description, slug, ishidden, address").order("event_date", { ascending: true }).limit(1); // Henter kun den første række pr. tabel
+          const { data: eventsData, error: eventsError } = await supabase.from(table).select("id, friendly_name, event_date, image_url, event_description, event_longdescription, slug, ishidden, address").order("event_date", { ascending: true }).limit(1); // Henter kun den første række pr. tabel
 
           if (eventsError) throw eventsError;
 
