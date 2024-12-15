@@ -15,6 +15,8 @@ export default function Tasks() {
   const [tasksNeedingVolunteers, setTasksNeedingVolunteers] = useState(0);
   const [displayVolunteers, setDisplayVolunteers] = useState(0);
   const [displayTasks, setDisplayTasks] = useState(0);
+  const [isLoading, setIsLoading] = useState(true); // Ny tilstand for indlæsning
+
   const router = useRouter();
   const { slug } = router.query;
 
@@ -91,6 +93,8 @@ export default function Tasks() {
     if (!slug) return;
 
     const fetchEventAndTasks = async () => {
+      setIsLoading(true); // Start loading
+
       try {
         const { data: tablesData, error: tablesError } = await supabase.rpc("get_public_tables");
         if (tablesError) throw tablesError;
@@ -117,32 +121,25 @@ export default function Tasks() {
 
         setEventInfo(foundEvent);
 
-        // Tilføj `is_hidden`-kolonne og filtrér baseret på loginstatus
         const { data: tasksData, error: tasksError } = await supabase.from(foundEvent.table_name).select("id, title, short_description, date, needed_volunteers, ishidden");
         if (tasksError) throw tasksError;
 
         const volunteerTable = foundEvent.table_name.replace("opgaver", "tilmeldte");
 
         const updatedTasks = await Promise.all(
-          tasksData
-            .filter((task) => (isLoggedIn ? true : !task.isHdden)) // Filtrér skjulte opgaver, hvis ikke logget ind
-            .map(async (task) => {
-              const { count, error: countError } = await supabase.from(volunteerTable).select("*", { count: "exact", head: true }).eq("task_id", task.id);
+          tasksData.map(async (task) => {
+            const { count, error: countError } = await supabase.from(volunteerTable).select("*", { count: "exact", head: true }).eq("task_id", task.id);
 
-              if (countError) console.error("Fejl ved hentning af tilmeldte:", countError);
-              return { ...task, signedUp: count || 0 };
-            })
+            if (countError) console.error("Fejl ved hentning af tilmeldte:", countError);
+            return { ...task, signedUp: count || 0 };
+          })
         );
 
-        const sortedTasks = updatedTasks.sort((a, b) => {
-          const isPastA = new Date(a.date) < new Date();
-          const isPastB = new Date(b.date) < new Date();
-          return isPastA !== isPastB ? (isPastA ? 1 : -1) : new Date(a.date) - new Date(b.date);
-        });
-
-        setTasks(sortedTasks);
+        setTasks(updatedTasks);
       } catch (err) {
         console.error("Fejl ved hentning af event og opgaver:", err);
+      } finally {
+        setIsLoading(false); // Stop loading
       }
     };
 
@@ -264,10 +261,6 @@ export default function Tasks() {
     }
   };
 
-  if (!eventInfo) {
-    return <div className="text-center text-gray-700 font-bold mt-20">Indlæser event...</div>;
-  }
-
   return (
     <>
       <style jsx>{`
@@ -276,6 +269,19 @@ export default function Tasks() {
           animation-duration: 1s;
           animation-fill-mode: forwards;
           animation-timing-function: cubic-bezier(0.5, 1, 1, 1);
+        }
+        .animate-pulse {
+          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+          0%,
+          100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.7;
+          }
         }
 
         @keyframes light-speed {
@@ -330,23 +336,38 @@ export default function Tasks() {
         <meta name="description" content="Learn more about us on this page." />
       </Head>
 
-      <div className="md:flex md:mt-32 items-center justify-center md:gap-12">
-        <div className="p-4 pt-7 mt-16 md:mt-0  items-center flex justify-center">
-          <Image src={eventInfo.image_url || "/placeholder.jpg"} alt="Event Billede" width={400} height={300} className="rounded-xl  shadow-lg" />
+      {isLoading ? (
+        <div className="md:flex md:mt-32 items-center justify-center md:gap-12">
+          <div className="p-4 pt-7 mt-16 md:mt-0  items-center flex justify-center">
+            <div className="bg-knap-10 w-[400px] h-[300px] rounded-xl shadow-lg animate-pulse"></div>
+          </div>
+          <div className="p-7 -mb-8 text-left">
+            <div className="bg-knap-10 h-6 w-40 mb-2 rounded animate-pulse"></div>
+            <div className="bg-knap-10 h-12 w-96 mb-4 rounded animate-pulse"></div>
+            <div className="bg-knap-10 h-4  w-96 mb-2 rounded animate-pulse"></div>
+            <div className="bg-knap-10 h-4 w-96 mb-2 rounded animate-pulse"></div>
+            <div className="bg-knap-10 h-8 w-96 mt-4 rounded animate-pulse"></div>
+          </div>
         </div>
-        <div className="p-7 -mb-8 text-left">
-          <p className="text-gray-700 font-bold md:text-lg pt-1 mb-2 text-sm">{formatDate(eventInfo.event_date)}</p>
-          <h1 className="text-gray-700 mb-2 font-bold md:text-6xl text-5xl">{eventInfo.friendly_name}</h1>
+      ) : (
+        <div className="md:flex md:mt-32 items-center justify-center md:gap-12">
+          <div className="p-4 pt-7 mt-16 md:mt-0  items-center flex justify-center">
+            <Image src={eventInfo.image_url || "/placeholder.jpg"} alt="Event Billede" width={400} height={300} className="rounded-xl  shadow-lg" />
+          </div>
+          <div className="p-7 -mb-8 text-left">
+            <p className="text-gray-700 font-bold md:text-lg pt-1 mb-2 text-sm">{formatDate(eventInfo.event_date)}</p>
+            <h1 className="text-gray-700 mb-2 font-bold md:text-6xl text-5xl">{eventInfo.friendly_name}</h1>
 
-          <p className="text-bono-10 mb-2 font-montserrat md:mt-3 break-words max-w-[600px]">{eventInfo.event_longdescription}</p>
-          <p className="text-bono-10 mb-2">
-            <strong> Addresse: {eventInfo.address}</strong>
-          </p>
-          <button onClick={handleShowPopup} className="mt-2 px-6 text-slate-900 border border-slate-900 p-1 rounded-lg text-left w-fit">
-            Vis mere
-          </button>
+            <p className="text-bono-10 mb-2 font-montserrat md:mt-3 break-words max-w-[600px]">{eventInfo.event_longdescription}</p>
+            <p className="text-bono-10 mb-2">
+              <strong> Addresse: {eventInfo.address}</strong>
+            </p>
+            <button onClick={handleShowPopup} className="mt-2 px-6 text-slate-900 border border-slate-900 p-1 rounded-lg text-left w-fit">
+              Vis mere
+            </button>
+          </div>
         </div>
-      </div>
+      )}
 
       {showPopup && (
         <div className="fixed px-4 inset-0 bg-opacity-50 flex items-center justify-center z-50">
@@ -374,7 +395,6 @@ export default function Tasks() {
               const isPast = isDatePast(task.date);
               const isFull = task.signedUp >= task.needed_volunteers;
 
-              // Kun vis opgaven, hvis brugeren er logget ind, eller opgaven ikke er skjult
               if (!isLoggedIn && task.ishidden) {
                 return null;
               }
