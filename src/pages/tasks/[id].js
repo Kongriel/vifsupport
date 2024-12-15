@@ -111,7 +111,7 @@ export default function TaskDetail({ isLoggedIn }) {
   };
 
   const toggleVolunteerDetails = (volunteerId) => {
-    if (!isLoggedIn) return; // Kun loggede brugere kan se detaljer
+    if (!isLoggedIn) return;
     setSelectedVolunteerId((prevId) => (prevId === volunteerId ? null : volunteerId));
   };
 
@@ -165,13 +165,13 @@ export default function TaskDetail({ isLoggedIn }) {
         return;
       }
 
-      // Update the time slot's current_volunteers
+      // Update current_volunteers
       await supabase
         .from(timeSlotTable)
         .update({ current_volunteers: timeSlot.current_volunteers + 1 })
         .eq("id", selectedTimeSlot);
 
-      // Confetti effect and success message
+      // Confetti
       confetti({
         scalar: 2,
         spread: 360,
@@ -180,7 +180,6 @@ export default function TaskDetail({ isLoggedIn }) {
         startVelocity: -35,
       });
 
-      // Refresh the task data
       fetchTaskData();
 
       // Reset form fields
@@ -218,12 +217,12 @@ export default function TaskDetail({ isLoggedIn }) {
   };
 
   const handleEditClick = () => {
-    if (!task) return; // Sørg for, at vi har en opgave at redigere
+    if (!task) return;
     router.push({
       pathname: "/admin",
       query: {
         id: task.id,
-        type, // Send typen med, så admin-siden ved, hvilken tabel den skal bruge
+        type,
       },
     });
   };
@@ -379,7 +378,7 @@ export default function TaskDetail({ isLoggedIn }) {
                   <thead>
                     <tr className="bg-knap-10">
                       <th className="border text-bono-10 border-gray-600 px-4 py-2 text-left">Navn</th>
-                      {/* Kun vis yderligere kolonner, hvis brugeren er logget ind */}
+                      {/*hvis brugeren er logget ind */}
                       {isLoggedIn && (
                         <>
                           <th className="border text-bono-10 border-gray-600 px-4 py-2 text-left">Telefon</th>
@@ -398,7 +397,6 @@ export default function TaskDetail({ isLoggedIn }) {
                         const slotA = timeSlots.find((slot) => slot.id === a.time_slot_id);
                         const slotB = timeSlots.find((slot) => slot.id === b.time_slot_id);
 
-                        // Ekstraher starttiderne, og brug fallback som 0, hvis ingen tidsrum findes
                         const startA = slotA ? new Date(`1970-01-01T${slotA.start_time}`) : new Date(0);
                         const startB = slotB ? new Date(`1970-01-01T${slotB.start_time}`) : new Date(0);
 
@@ -408,7 +406,7 @@ export default function TaskDetail({ isLoggedIn }) {
                       .map((volunteer, index) => (
                         <tr key={index} className="hover:bg-gray-100">
                           <td className="border text-bono-10 border-gray-600 px-4 py-2 text-left">{volunteer.name}</td>
-                          {/* Kun vis yderligere data, hvis brugeren er logget ind */}
+                          {/* hvis brugeren er logget ind */}
                           {isLoggedIn && (
                             <>
                               <td className="border text-bono-10 border-gray-600 px-4 py-2 break-words text-left">{volunteer.phone || "N/A"}</td>

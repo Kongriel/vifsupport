@@ -10,7 +10,8 @@ export default function EventPage() {
   const [error, setError] = useState(null);
   const [daysUntilNextEvent, setDaysUntilNextEvent] = useState(0);
   const [targetDays, setTargetDays] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Tjek om brugeren er logget ind
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const router = useRouter();
 
@@ -30,6 +31,7 @@ export default function EventPage() {
 
   useEffect(() => {
     const fetchEvents = async () => {
+      setIsLoading(true); // Start loading state
       try {
         const { data: tablesData, error: tablesError } = await supabase.rpc("get_public_tables");
         if (tablesError) throw tablesError;
@@ -63,6 +65,8 @@ export default function EventPage() {
       } catch (err) {
         console.error("Fejl ved hentning af events:", err);
         setError("Kunne ikke hente events.");
+      } finally {
+        setIsLoading(false); // Stop loading state
       }
     };
 
@@ -124,7 +128,7 @@ export default function EventPage() {
       if (deleteElement) {
         // Start sletteanimationen
         deleteElement.classList.add("light-speed");
-        await new Promise((resolve) => setTimeout(resolve, 1000)); // Vent på animationens afslutning
+        await new Promise((resolve) => setTimeout(resolve, 1000));
       }
 
       // DROP de relaterede tabeller
@@ -163,7 +167,7 @@ export default function EventPage() {
         event_longdescription: event.event_longdescription,
         address: event.address,
         slug: event.slug,
-      }).filter(([_, value]) => value !== null && value !== undefined) // Fjern null/undefined værdier
+      }).filter(([_, value]) => value !== null && value !== undefined)
     );
 
     router.push(`/admin?${params.toString()}`);
@@ -187,6 +191,22 @@ export default function EventPage() {
           animation-duration: 1s;
           animation-fill-mode: forwards;
           animation-timing-function: cubic-bezier(0.5, 1, 1, 1);
+        }
+
+        .animate-pulse {
+          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+          0%,
+          100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.5;
+          }
+        }
+        .bg-gray-300 {
+          background-color: #e0e0e0;
         }
 
         @keyframes light-speed {
@@ -249,50 +269,69 @@ export default function EventPage() {
 
         <div className="flex flex-col gap-8 items-center">
           {error && <p className="text-red-500">{error}</p>}
-          {events
-            .filter((event) => isLoggedIn || !event.ishidden) // Skjuler events for ikke-loggede brugere
-            .map((event, index) => (
-              <div key={index} className="w-full">
-                <div id={`event-${event.slug}`} className="flex flex-col md:flex-row items-center gap-4 md:gap-16 max-w-4xl mx-auto">
-                  <div className="order-1 md:order-2 flex-1">
-                    <p className="font-montserrat font-semibold text-sm text-bono-10">{formatDate(event.event_date)}</p>
-
-                    <h1 className="font-bebas font-bold text-customClampMedium text-bono-10">{event.friendly_name}</h1>
-                    <p className="font-montserrat mb-1 -mt-1 text-bono-10">
-                      {" "}
-                      <strong>{event.address}</strong>
-                    </p>
-                    <p className="font-montserrat text-sm text-bono-10">{event.event_description}</p>
-
-                    <Link href={`/events/${event.slug}`}>
-                      <button className="flex justify-center items-center relative md:w-full w-96 h-12 max-w-[400px] mt-1 cursor-pointer" aria-label="Læs Mere">
-                        <div className="absolute flex bg-knap-10 justify-center items-center h-8 w-full text-sm rounded-xl border-2 hover:border-blue-600 border-gray-500"></div>
-                        <div className="absolute text-bono-10 hover:border-blue-600 text-base">Læs Mere</div>
-                      </button>
-                    </Link>
-
-                    {isLoggedIn && (
-                      <div className="flex items-center mt-4 gap-4">
-                        {/* Rediger-knap */}
-                        <button onClick={() => handleEditEvent(event)} className="btn text-bono-10 btn-edit">
-                          Rediger
-                        </button>
-                        <button onClick={() => toggleVisibility(event)} className={`px-4 py-2   ${event.ishidden ? "  text-bono-10" : " text-bono-10 "}`}>
-                          {event.ishidden ? "Offentliggør" : "Skjul"}
-                        </button>
-                        <button onClick={() => handleDeleteEvent(event)} className=" text-red-700 px-4 py-2  ">
-                          Slet Event
-                        </button>
-                      </div>
-                    )}
+          {isLoading ? (
+            // Skeleton Loading Placeholder
+            <div className="flex flex-col gap-8 items-center">
+              {[...Array(3)].map((_, index) => (
+                <div key={index} className="w-full max-w-4xl mx-auto animate-pulse">
+                  <div className="flex flex-col md:flex-row items-center gap-4 md:gap-16">
+                    <div className="order-1 md:order-2 flex-1">
+                      <div className="bg-taupe-10 border border-gray-400 h-6 w-1/4 mb-2 rounded"></div>
+                      <div className="bg-taupe-10 border border-gray-400 h-8 w-1/2 mb-4 rounded"></div>
+                      <div className="bg-taupe-10 border border-gray-400 h-4 w-3/4 mb-2 rounded"></div>
+                      <div className="bg-taupe-10 border border-gray-400 h-4 w-1/2 mb-2 rounded"></div>
+                      <div className="bg-taupe-10 border border-gray-400 h-10 w-32 mt-4 rounded"></div>
+                    </div>
+                    <div className="order-2 md:order-1 flex-shrink-0">
+                      <div className="bg-taupe-10 border border-gray-400 h-48 w-64 rounded shadow-lg"></div>
+                    </div>
                   </div>
-                  <Link href={`/events/${event.slug}`} className="order-2 md:order-1 mb-4 flex-shrink-0">
-                    <Image src={event.image_url || "/placeholder.jpg"} alt={`Billede af ${event.friendly_name}`} width={400} height={300} className="rounded shadow-lg w-full max-w-[400px]" />
-                  </Link>
+                  <hr className="w-full border-knap-10 my-8" />
                 </div>
-                <hr className="w-full border-knap-10 my-8" />
-              </div>
-            ))}
+              ))}
+            </div>
+          ) : (
+            // Indhold, når data er indlæst
+            events
+              .filter((event) => isLoggedIn || !event.ishidden)
+              .map((event, index) => (
+                <div key={index} className="w-full">
+                  <div id={`event-${event.slug}`} className="flex flex-col md:flex-row items-center gap-4 md:gap-16 max-w-4xl mx-auto">
+                    <div className="order-1 md:order-2 flex-1">
+                      <p className="font-montserrat font-semibold text-sm text-bono-10">{formatDate(event.event_date)}</p>
+                      <h1 className="font-bebas font-bold text-customClampMedium text-bono-10">{event.friendly_name}</h1>
+                      <p className="font-montserrat mb-1 -mt-1 text-bono-10">
+                        <strong>{event.address}</strong>
+                      </p>
+                      <p className="font-montserrat text-sm text-bono-10">{event.event_description}</p>
+                      <Link href={`/events/${event.slug}`}>
+                        <button className="flex justify-center items-center relative md:w-full w-96 h-12 max-w-[400px] mt-1 cursor-pointer" aria-label="Læs Mere">
+                          <div className="absolute flex bg-knap-10 justify-center items-center h-8 w-full text-sm rounded-xl border-2 hover:border-blue-600 border-gray-500"></div>
+                          <div className="absolute text-bono-10 hover:border-blue-600 text-base">Læs Mere</div>
+                        </button>
+                      </Link>
+                      {isLoggedIn && (
+                        <div className="flex items-center mt-4 gap-4">
+                          <button onClick={() => handleEditEvent(event)} className="btn text-bono-10 btn-edit">
+                            Rediger
+                          </button>
+                          <button onClick={() => toggleVisibility(event)} className={`px-4 py-2 ${event.ishidden ? "text-bono-10" : "text-bono-10"}`}>
+                            {event.ishidden ? "Offentliggør" : "Skjul"}
+                          </button>
+                          <button onClick={() => handleDeleteEvent(event)} className="text-red-700 px-4 py-2">
+                            Slet Event
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                    <Link href={`/events/${event.slug}`} className="order-2 md:order-1 mb-4 flex-shrink-0">
+                      <Image src={event.image_url || "/placeholder.jpg"} alt={`Billede af ${event.friendly_name}`} width={400} height={300} className="rounded shadow-lg w-full max-w-[400px]" />
+                    </Link>
+                  </div>
+                  <hr className="w-full border-knap-10 my-8" />
+                </div>
+              ))
+          )}
         </div>
       </div>
     </>
