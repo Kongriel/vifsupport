@@ -776,47 +776,49 @@ export default function Admin() {
           </div>
         </div>
         <div>
-          <h2 className="text-3xl font-semibold text-bono-10 md:mt-0 mt-10 mb-6">Opret et nyt Event</h2>
-          <form className="bg-knap-10 border text-bono-10 w-96 h-fit border-gray-700 p-6 rounded">
-            <label className="block text-bono-10 font-semibold mb-4">
-              Eventnavn:
-              <input type="text" value={newEventName} onChange={(e) => setNewEventName(e.target.value)} className="w-full bg-knap-10 border border-gray-700 text-bono-10 rounded p-2" placeholder="" required />
-            </label>
-            <label className="block text-bono-10 font-semibold mb-4">
-              Eventdato:
-              <input type="date" value={newEventDate} onChange={(e) => setNewEventDate(e.target.value)} className="w-full bg-knap-10 border border-gray-700 text-bono-10 rounded p-2" required />
-            </label>
-            <label className="block text-bono-10 font-semibold mb-4">
-              Kort Eventbeskrivelse:
-              <textarea value={newEventDescription} onChange={(e) => setNewEventDescription(e.target.value)} className="w-full bg-knap-10 border border-gray-700 text-bono-10 rounded p-2" placeholder="" required />
-            </label>
-            <label className="block text-bono-10 font-semibold mb-4">
-              Lang Eventbeskrivelse:
-              <textarea value={newEventlongDescription} onChange={(e) => setNewEventlongDescription(e.target.value)} className="w-full bg-knap-10 border border-gray-700 text-bono-10 rounded p-2" placeholder="" required />
-            </label>
-            <label className="block text-bono-10 font-semibold mb-4">
-              Adresse:
-              <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} className="w-full bg-knap-10 border border-gray-700 text-bono-10 rounded p-2" placeholder="" required />
-            </label>
+          <div className="flex-col min-h-screen  justify-center">
+            <h2 className="text-3xl font-semibold text-bono-10 md:mt-0 mt-10 mb-6">Opret et nyt Event</h2>
+            <form className="bg-knap-10 border text-bono-10 max-w-96 h-fit border-gray-700 p-6 rounded">
+              <label className="block text-bono-10 font-semibold mb-4">
+                Eventnavn:
+                <input type="text" value={newEventName} onChange={(e) => setNewEventName(e.target.value)} className="w-full bg-knap-10 border border-gray-700 text-bono-10 rounded p-2" placeholder="" required />
+              </label>
+              <label className="block text-bono-10 font-semibold mb-4">
+                Eventdato:
+                <input type="date" value={newEventDate} onChange={(e) => setNewEventDate(e.target.value)} className="w-full bg-knap-10 border border-gray-700 text-bono-10 rounded p-2" required />
+              </label>
+              <label className="block text-bono-10 font-semibold mb-4">
+                Kort Eventbeskrivelse:
+                <textarea value={newEventDescription} onChange={(e) => setNewEventDescription(e.target.value)} className="w-full bg-knap-10 border border-gray-700 text-bono-10 rounded p-2" placeholder="" required />
+              </label>
+              <label className="block text-bono-10 font-semibold mb-4">
+                Lang Eventbeskrivelse:
+                <textarea value={newEventlongDescription} onChange={(e) => setNewEventlongDescription(e.target.value)} className="w-full bg-knap-10 border border-gray-700 text-bono-10 rounded p-2" placeholder="" required />
+              </label>
+              <label className="block text-bono-10 font-semibold mb-4">
+                Adresse:
+                <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} className="w-full bg-knap-10 border border-gray-700 text-bono-10 rounded p-2" placeholder="" required />
+              </label>
 
-            <label className="block text-bono-10 font-semibold mb-4">
-              Billede:
-              <input type="file" accept="image/*" onChange={handleImageChange} className="w-full bg-knap-10 border border-gray-700 text-bono-10 rounded p-2" required />
-            </label>
+              <label className="block text-bono-10 font-semibold mb-4">
+                Billede:
+                <input type="file" accept="image/*" onChange={handleImageChange} className="w-full bg-knap-10 border border-gray-700 text-bono-10 rounded p-2" required />
+              </label>
 
-            {/* Display URL of the uploaded image */}
-            {newEventImageUrl && <p className="text-gray-500 mt-2">Billed-URL: {newEventImageUrl}</p>}
-            <div className="flex flex-col">
-              <button type="button" onClick={handleUploadImage} className="btn btn-primary text-bono-10 font-semibold text-left">
-                Upload billede
-              </button>
-              <button type="button" onClick={editMode ? saveEventChanges : createNewEventTables} className="btn bg-knap-10 border-gray-700 border hover:bg-taupe-10 rounded py-1 font-semibold btn-primary mt-4">
-                {editMode ? "Gem Ændringer" : "Opret Event"}
-              </button>
-            </div>
-            {success && <p className="text-bono-10 mt-4">{success}</p>}
-            {error && <p className="text-red-500 mt-4">{error}</p>}
-          </form>
+              {/* Display URL of the uploaded image */}
+              {newEventImageUrl && <p className="text-gray-500 mt-2">Billed-URL: {newEventImageUrl}</p>}
+              <div className="flex flex-col">
+                <button type="button" onClick={handleUploadImage} className="btn btn-primary text-bono-10 font-semibold text-left">
+                  Upload billede
+                </button>
+                <button type="button" onClick={editMode ? saveEventChanges : createNewEventTables} className="btn bg-knap-10 border-gray-700 border hover:bg-taupe-10 rounded py-1 font-semibold btn-primary mt-4">
+                  {editMode ? "Gem Ændringer" : "Opret Event"}
+                </button>
+              </div>
+              {success && <p className="text-bono-10 mt-4">{success}</p>}
+              {error && <p className="text-red-500 mt-4">{error}</p>}
+            </form>
+          </div>
         </div>
       </div>
     </>

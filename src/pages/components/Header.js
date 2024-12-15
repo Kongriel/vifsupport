@@ -37,19 +37,19 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
 
           {/* Navigation for desktop */}
           <nav className="hidden  md:flex space-x-6">
-            <Link href="/event" className="relative text-bono-10 font-montserrat font-semibold  transition-all duration-200 before:content-[''] before:absolute before:bottom-2 before:left-0 before:h-[2px] before:w-0 before:bg-gray-700 hover:before:w-full before:transition-all before:duration-300">
+            <Link href="/event" className="relative text-bono-10 font-montserrat font-semibold  transition-all duration-200 before:content-[''] before:absolute before:bottom-2 before:left-0 before:h-[2px] before:w-0 before:bg-gray-700 hover:before:w-full before:transition-all before:duration-250">
               Events
             </Link>
-            <Link href="/about" className="relative text-bono-10 font-montserrat font-semibold  transition-all duration-200 before:content-[''] before:absolute before:bottom-2 before:left-0 before:h-[2px] before:w-0 before:bg-gray-700 hover:before:w-full before:transition-all before:duration-300">
+            <Link href="/about" className="relative text-bono-10 font-montserrat font-semibold  transition-all duration-200 before:content-[''] before:absolute before:bottom-2 before:left-0 before:h-[2px] before:w-0 before:bg-gray-700 hover:before:w-full before:transition-all before:duration-250">
               Om os
             </Link>
-            <Link href="/admin" className="relative text-bono-10 font-montserrat font-semibold  transition-all duration-200 before:content-[''] before:absolute before:bottom-2 before:left-0 before:h-[2px] before:w-0 before:bg-gray-700 hover:before:w-full before:transition-all before:duration-300">
+            <Link href="/admin" className="relative text-bono-10 font-montserrat font-semibold  transition-all duration-200 before:content-[''] before:absolute before:bottom-2 before:left-0 before:h-[2px] before:w-0 before:bg-gray-700 hover:before:w-full before:transition-all before:duration-250">
               Admin
             </Link>
 
             {isLoggedIn ? (
               <Link className="" href="/">
-                <button onClick={handleLogout} className="bg-red-600 border border-gray-600 text-white px-4 py-2 -mt-2 rounded hover:bg-red-600" aria-label="log ud">
+                <button onClick={handleLogout} className="bg-red-700 border border-red-800  text-white px-4 py-2 -mt-2 rounded hover:bg-red-600" aria-label="log ud">
                   Log ud
                 </button>
               </Link>

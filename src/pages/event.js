@@ -277,10 +277,10 @@ export default function EventPage() {
                         <button onClick={() => handleEditEvent(event)} className="btn text-bono-10 btn-edit">
                           Rediger
                         </button>
-                        <button onClick={() => toggleVisibility(event)} className={`px-4 py-2 rounded border border-gray-700 ${event.ishidden ? " bg-green-500  text-white" : "bg-gray-400 text-bono-10 "}`}>
+                        <button onClick={() => toggleVisibility(event)} className={`px-4 py-2   ${event.ishidden ? "  text-bono-10" : " text-bono-10 "}`}>
                           {event.ishidden ? "Offentliggør" : "Skjul"}
                         </button>
-                        <button onClick={() => handleDeleteEvent(event)} className="bg-red-500 text-white px-4 py-2 border-gray-700 rounded hover:bg-red-600">
+                        <button onClick={() => handleDeleteEvent(event)} className=" text-red-700 px-4 py-2  ">
                           Slet Event
                         </button>
                       </div>
