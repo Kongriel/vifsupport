@@ -194,7 +194,7 @@ export default function EventPage() {
         }
 
         .animate-pulse {
-          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+          animation: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
         @keyframes pulse {
           0%,
@@ -202,7 +202,7 @@ export default function EventPage() {
             opacity: 1;
           }
           50% {
-            opacity: 0.5;
+            opacity: 0.7;
           }
         }
         .bg-gray-300 {
@@ -273,17 +273,17 @@ export default function EventPage() {
             // Skeleton Loading Placeholder
             <div className="flex flex-col gap-8 items-center">
               {[...Array(3)].map((_, index) => (
-                <div key={index} className="w-full max-w-4xl mx-auto animate-pulse">
+                <div key={index} className="w-full  mx-auto animate-pulse">
                   <div className="flex flex-col md:flex-row items-center gap-4 md:gap-16">
                     <div className="order-1 md:order-2 flex-1">
-                      <div className="bg-taupe-10 border border-gray-400 h-6 w-1/4 mb-2 rounded"></div>
-                      <div className="bg-taupe-10 border border-gray-400 h-8 w-1/2 mb-4 rounded"></div>
-                      <div className="bg-taupe-10 border border-gray-400 h-4 w-3/4 mb-2 rounded"></div>
-                      <div className="bg-taupe-10 border border-gray-400 h-4 w-1/2 mb-2 rounded"></div>
-                      <div className="bg-taupe-10 border border-gray-400 h-10 w-32 mt-4 rounded"></div>
+                      <div className="bg-knap-10 h-4 w-32 mb-2 rounded"></div>
+                      <div className="bg-knap-10 h-8 w-96 mb-4 rounded"></div>
+                      <div className="bg-knap-10 h-4 w-96 mb-2 rounded"></div>
+                      <div className="bg-knap-10 h-4 w-96 mb-2 rounded"></div>
+                      <div className="bg-knap-10 h-10 w-96 mt-4 rounded"></div>
                     </div>
                     <div className="order-2 md:order-1 flex-shrink-0">
-                      <div className="bg-taupe-10 border border-gray-400 h-48 w-64 rounded shadow-lg"></div>
+                      <div className="bg-knap-10 h-48 w-96 rounded shadow-lg"></div>
                     </div>
                   </div>
                   <hr className="w-full border-knap-10 my-8" />
