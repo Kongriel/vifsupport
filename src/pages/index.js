@@ -18,7 +18,7 @@ export default function Home() {
         {/* Tekst og knap */}
 
         <div className="text-center md:text-center mt-8 md:w-1/2 px-6">
-          <h1 className=" text-4xl font-bebas font-bold mb-5 text-bono-10 align-center">Velkommen Til VIF Supportere</h1>
+          <h1 className=" md:text-6xl text-5xl font-bebas font-bold mb-5 text-bono-10 align-center">VIF Supportere</h1>
 
           <p className="text-lg mb-8 font-montserrat font-semibold text-bono-10">Her på siden finder du løbende frivillige opgaver, som du kan tilmelde dig og være med til at gøre en forskel. </p>
 
