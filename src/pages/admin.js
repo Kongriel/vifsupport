@@ -558,7 +558,7 @@ export default function Admin() {
     }
   };
 
-  // Håndter billede-upload
+  // billede-upload
   const handleUploadImage = async () => {
     if (!newEventImage) {
       setError("Vælg venligst et billede først!");
@@ -566,10 +566,7 @@ export default function Admin() {
     }
 
     try {
-      // Definer billede-filens sti i Supabase Storage
       const filePath = `public/${newEventImage.name}`;
-
-      // Upload billede til Supabase Storage
       const { data, error: uploadError } = await supabase.storage.from("Photos").upload(filePath, newEventImage);
 
       if (uploadError) {
@@ -582,7 +579,7 @@ export default function Admin() {
       console.log("Manuel URL:", imageUrl);
 
       setNewEventImageUrl(imageUrl);
-      setError(null); // Ryd eventuel fejl
+      setError(null);
       setSuccess("Billede uploadet og URL genereret!");
     } catch (err) {
       console.error("Fejl:", err.message);
@@ -672,7 +669,7 @@ export default function Admin() {
         }
       } else {
         // Hvis vi ikke er i editMode, opret et nyt event
-        await createNewEventTables(); // Brug den eksisterende logik til at oprette et nyt event
+        await createNewEventTables();
       }
     } catch (err) {
       setError("Fejl ved oprettelse eller ændring af event.");
@@ -747,8 +744,11 @@ export default function Admin() {
               <div className="mb-4">
                 <label className="block font-semibold text-bono-10 mb-2">Tidsrum:</label>
                 <div className="grid gap-2 mb-2">
+                  <label>Start-tid</label>
                   <input type="time" value={newStartTime} onChange={(e) => setNewStartTime(e.target.value)} className="bg-knap-10 border text-bono-10 border-gray-600 rounded p-2" />
+                  <label>Slut-tid</label>
                   <input type="time" value={newEndTime} onChange={(e) => setNewEndTime(e.target.value)} className="bg-knap-10 border text-bono-10 border-gray-600 rounded p-2" />
+                  <label>Antal Frivillige</label>
                   <input type="number" value={maxVolunteers} onChange={(e) => setMaxVolunteers(Number(e.target.value))} className="bg-knap-10 border text-bono-10 border-gray-600 rounded p-2" min="1" />
                   <button type="button" onClick={addTimeSlot} className="bg-knap-10 text-bono-10 border border-gray-700 font-semibold px-4 hover:bg-taupe-10 rounded">
                     Tilføj
