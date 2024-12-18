@@ -273,7 +273,7 @@ export default function TaskDetail({ isLoggedIn }) {
       `}</style>
       <Head>
         <title>Opgavedetaljer</title>
-        <meta name="Opgave Detalje Side" content="Her Finder du information og tilmelding af opgave" />
+        <meta name="description" content="Få information om opgaven. Se tidsrum, behovet for frivillige og tilmeld dig for at hjælpe med praktiske opgaver." />
       </Head>
       <div className="md:p-16 mt-32 md:mt-12 min-h-screen ">
         <h1 className="text-5xl text-center mt-7 font-bebas font-bold text-bono-10 md:mb-16 md:mt-8 mb-3">Opgave Detaljer</h1>

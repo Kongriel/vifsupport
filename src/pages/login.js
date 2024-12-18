@@ -27,7 +27,7 @@ export default function Login({ setIsLoggedIn }) {
     <>
       <Head>
         <title>Log in</title>
-        <meta name="Log in side" content="Log in side for adminstratorer" />
+        <meta name="description" content="Log ind for at administrere events og opgaver. Kun autoriserede brugere har adgang til dette panel." />
       </Head>
       <div className="p-8 min-h-screen flex items-center justify-center">
         <form onSubmit={handleLogin} className=" bg-knap-10  p-6 rounded-xl shadow-lg border border-gray-600 md:w-4/12 mx-auto">

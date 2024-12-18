@@ -20,7 +20,7 @@ export default function Home() {
     <>
       <Head>
         <title>Viffsupport Startside</title>
-        <meta name="description" content="Learn more about us on this page." />
+        <meta name="description" content="Forsiden på VifSupport side" />
       </Head>
       <div className="flex min-h-screen md:pl-6 md:mt-16 md:pr-6 flex-col md:flex-row items-center justify-center  ">
         {/* Billede */}

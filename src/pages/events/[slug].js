@@ -333,7 +333,7 @@ export default function Tasks() {
       `}</style>
       <Head>
         <title>Event-info og opgaver</title>
-        <meta name="Event Info og Opgaver" content="Tjek Eventet og dens opgaver ud" />
+        <meta name="description" content="Oplev detaljer om eventet. Tilmeld dig opgaver, hjælp til arrangementet og gør en forskel som frivillig." />
       </Head>
 
       {isLoading ? (

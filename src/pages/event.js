@@ -258,7 +258,7 @@ export default function EventPage() {
       `}</style>
       <Head>
         <title>Event side</title>
-        <meta name="Eventside" content="Tjek kommende Events ud" />
+        <meta name="description" content="Se en oversigt over kommende events og bliv en del af fællesskabet ved at tilmelde dig som frivillig til spændende opgaver." />
       </Head>
       <div className="min-h-screen mt-20 md:px-12 px-4 overflow-x-hidden">
         <div className="flex flex-col items-center mt-24 justify-center">

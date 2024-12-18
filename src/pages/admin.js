@@ -684,8 +684,8 @@ export default function Admin() {
   return (
     <>
       <Head>
-        <title>Viffsupport Startside</title>
-        <meta name="description" content="Learn more about us on this page." />
+        <title>adminstrator side</title>
+        <meta name="description" content="Administrationspanel for oprettelse, redigering og styring af events og opgaver. Kun for autoriserede brugere." />
       </Head>
       <div className="p-8 justify-evenly mt-24 md:flex min-h-screen">
         <div className="">
