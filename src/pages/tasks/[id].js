@@ -313,13 +313,16 @@ export default function TaskDetail({ isLoggedIn }) {
             {message && <p className="text-green-600 font-bold mb-4">{message}</p>}
             <form onSubmit={handleSubmit} className=" space-y-4">
               <div>
-                <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Navn" className="block w-full text-gray-700 border rounded p-2" required />
+                <label className=" text-bono-10">Navn</label>
+                <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Navn" className="block w-full bg-knap-10 text-bono-10 border border-gray-700 rounded p-2" required />
               </div>
               <div>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" className="block w-full text-gray-700 border rounded p-2" required />
+                <label className=" text-bono-10">Email</label>
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" className="block w-full bg-knap-10 text-bono-10 border border-gray-700 rounded p-2" required />
               </div>
               <div>
-                <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Telefonnummer" className="block w-full text-gray-700 border rounded p-2" required />
+                <label className=" text-bono-10">Telefon nr</label>
+                <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Telefonnummer" className="block w-full bg-knap-10 text-bono-10 border border-gray-700 rounded p-2" required />
               </div>
               <div className="mt-4 flex gap-4">
                 <label className="inline-flex items-center">
@@ -334,16 +337,19 @@ export default function TaskDetail({ isLoggedIn }) {
               {isParent && (
                 <>
                   <div>
-                    <input type="text" value={childName} onChange={(e) => setChildName(e.target.value)} placeholder="Barnets navn" className="block w-full border text-gray-700 rounded p-2" required />
+                    <label className=" text-bono-10">Navn på barn</label>
+                    <input type="text" value={childName} onChange={(e) => setChildName(e.target.value)} placeholder="Barnets navn" className="block w-full bg-knap-10 text-bono-10 border border-gray-700 rounded p-2" required />
                   </div>
                   <div>
-                    <input type="text" value={teamName} onChange={(e) => setTeamName(e.target.value)} placeholder="Barnets hold" className="block w-full border text-gray-700 rounded p-2" required />
+                    <label className=" text-bono-10">Holdnavn</label>
+                    <input type="text" value={teamName} onChange={(e) => setTeamName(e.target.value)} placeholder="Barnets hold" className="block w-full bg-knap-10 text-bono-10 border border-gray-700 rounded p-2" required />
                   </div>
                 </>
               )}
               {!isParent && (
                 <div>
-                  <input type="text" value={teamName} onChange={(e) => setTeamName(e.target.value)} placeholder="Mit hold" className="block w-full text-gray-700 border rounded p-2" required />
+                  <label className=" text-bono-10">Hold navn</label>
+                  <input type="text" value={teamName} onChange={(e) => setTeamName(e.target.value)} placeholder="Mit hold" className="block w-full bg-knap-10 text-bono-10 border border-gray-700 rounded p-2" required />
                 </div>
               )}
               <div className="mb-4">
@@ -358,9 +364,10 @@ export default function TaskDetail({ isLoggedIn }) {
                 </select>
               </div>
               <div>
-                <textarea value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Kommentar" className="block w-full border rounded p-2" />
+                <label className=" text-bono-10">Kommentar</label>
+                <textarea value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Kommentar" className="block bg-knap-10 text-bono-10 border border-gray-700 w-full rounded p-2" />
               </div>
-              <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+              <button type="submit" className="w-full bg-knap-10 font-semibold text-bono-10 p-2 rounded border border-gray-700 hover:bg-taupe-10">
                 Tilmeld
               </button>
             </form>
