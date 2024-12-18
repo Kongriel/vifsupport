@@ -744,12 +744,18 @@ export default function Admin() {
               <div className="mb-4">
                 <label className="block font-semibold text-bono-10 mb-2">Tidsrum:</label>
                 <div className="grid gap-2 mb-2">
-                  <label>Start-tid</label>
-                  <input type="time" value={newStartTime} onChange={(e) => setNewStartTime(e.target.value)} className="bg-knap-10 border text-bono-10 border-gray-600 rounded p-2" />
-                  <label>Slut-tid</label>
-                  <input type="time" value={newEndTime} onChange={(e) => setNewEndTime(e.target.value)} className="bg-knap-10 border text-bono-10 border-gray-600 rounded p-2" />
-                  <label>Antal Frivillige</label>
-                  <input type="number" value={maxVolunteers} onChange={(e) => setMaxVolunteers(Number(e.target.value))} className="bg-knap-10 border text-bono-10 border-gray-600 rounded p-2" min="1" />
+                  <label>
+                    Start-tid
+                    <input type="time" value={newStartTime} onChange={(e) => setNewStartTime(e.target.value)} className="bg-knap-10 border text-bono-10 border-gray-600 rounded p-2" />
+                  </label>
+                  <label>
+                    Slut-tid
+                    <input type="time" value={newEndTime} onChange={(e) => setNewEndTime(e.target.value)} className="bg-knap-10 border text-bono-10 border-gray-600 rounded p-2" />
+                  </label>
+                  <label>
+                    Antal Frivillige
+                    <input type="number" value={maxVolunteers} onChange={(e) => setMaxVolunteers(Number(e.target.value))} className="bg-knap-10 border text-bono-10 border-gray-600 rounded p-2" min="1" />
+                  </label>
                   <button type="button" onClick={addTimeSlot} className="bg-knap-10 text-bono-10 border border-gray-700 font-semibold px-4 hover:bg-taupe-10 rounded">
                     Tilføj
                   </button>
