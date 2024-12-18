@@ -1,7 +1,3 @@
-import Image from "next/image";
-import localFont from "next/font/local";
-import Link from "next/link";
-import Socials from "./components/Socials";
 import Head from "next/head";
 import Card from "./components/Card";
 
