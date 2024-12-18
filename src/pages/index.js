@@ -1,7 +1,5 @@
 import Image from "next/image";
-import localFont from "next/font/local";
 import Link from "next/link";
-import Socials from "./components/Socials";
 import Head from "next/head";
 
 export default function Home() {
