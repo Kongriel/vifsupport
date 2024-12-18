@@ -10,12 +10,9 @@ export default function Home() {
         <meta name="description" content="Forsiden på VifSupport side" />
       </Head>
       <div className="flex min-h-screen md:pl-6 md:mt-16 md:pr-6 flex-col md:flex-row items-center justify-center  ">
-        {/* Billede */}
-        <div className="w-full md:-mt-4 -mt-44  md:w-1/2">
+        <div className="w-full md:-mt-4 -mt-40  md:w-1/2">
           <Image src="/forside.webp" alt="VIF Gymnastik" width={500} height={500} className="object-cover rounded-lg w-full h-auto" />
         </div>
-
-        {/* Tekst og knap */}
 
         <div className="text-center md:text-center mt-8 md:w-1/2 px-6">
           <h1 className=" md:text-6xl text-5xl font-bebas font-bold mb-5 text-bono-10 align-center">VIF Supportere</h1>

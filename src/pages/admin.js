@@ -15,8 +15,8 @@ export default function Admin() {
   const [newEventImage, setNewEventImage] = useState(null); // Til at holde billedet
   const [editMode, setEditMode] = useState(false);
   const [eventToEdit, setEventToEdit] = useState(null);
-  const [eventId, setEventId] = useState(null); // Her defineres eventId
-  const [eventSlug, setEventSlug] = useState(""); // Eventslug til dynamisk tabelhåndtering
+  const [eventId, setEventId] = useState(null);
+  const [eventSlug, setEventSlug] = useState("");
 
   const [tableOptions, setTableOptions] = useState([]); // Dynamisk liste over tabeller
   const [tableSelection, setTableSelection] = useState(""); // Default tabel
@@ -117,7 +117,7 @@ export default function Admin() {
             const { data, error } = await supabase
               .from(tablename)
               .select("friendly_name, image_url")
-              .filter("image_url", "neq", null) // Kun de tabeller med et udfyldt image_url
+              .filter("image_url", "neq", null)
               .limit(1) // Begræns til 1 række for at få den første matchende række
               .single();
 
@@ -131,7 +131,6 @@ export default function Admin() {
           })
         );
 
-        // Filtrer de tabeller, hvor data er null (dvs. ingen image_url)
         const filteredTableDetails = tableDetails.filter((table) => table !== null);
 
         setTableOptions(filteredTableDetails);
@@ -148,7 +147,7 @@ export default function Admin() {
     };
 
     fetchTablesWithFriendlyNames();
-  }, [type]); // Fjern `tableSelection` fra afhængigheder
+  }, [type]);
 
   const handleTableChange = (e) => {
     setTableSelection(e.target.value);
@@ -178,7 +177,7 @@ export default function Admin() {
     try {
       let imageUrl = newEventImageUrl;
 
-      // 2. Hent eksisterende tabeller og generér nye tabeller
+      //  Hent eksisterende tabeller og generér nye tabeller
       const { data: tablesData, error: tablesError } = await supabase.rpc("get_public_tables");
       if (tablesError) throw new Error("Kunne ikke hente eksisterende tabeller: " + tablesError.message);
 
@@ -254,7 +253,7 @@ export default function Admin() {
         }
       }
 
-      // 3. Indsæt eventet i den nye opgaver-tabel
+      //  Indsæt eventet i den nye opgaver-tabel
       const { error: insertError } = await supabase.from(newOpgaverTable).insert({
         friendly_name: newEventName,
         slug,
@@ -263,7 +262,7 @@ export default function Admin() {
         event_description: newEventDescription,
         event_longdescription: newEventlongDescription,
         address,
-        order: 0, // Tilføj default order-værdi her
+        order: 0,
       });
 
       if (insertError) {
@@ -276,7 +275,7 @@ export default function Admin() {
       setNewEventName("");
       setNewEventDate("");
       setNewEventDescription("");
-      setNewEventImageUrl(""); // Ryd URL'en, når eventet er oprettet
+      setNewEventImageUrl("");
       setAddress("");
     } catch (err) {
       console.error("Fejl:", err);
@@ -287,16 +286,13 @@ export default function Admin() {
 
   // Funktion til at tjekke om billedet allerede findes i Supabase
   const checkIfImageExists = async (filePath) => {
-    const { data, error } = await supabase.storage
-      .from("Photos") // Erstat med dit bucket-navn
-      .getPublicUrl(filePath);
+    const { data, error } = await supabase.storage.from("Photos").getPublicUrl(filePath);
 
     if (error) {
       console.error("Fejl ved at tjekke billede:", error);
-      return false; // Hvis der er en fejl, antag at billedet ikke findes
+      return false;
     }
 
-    // Hvis vi får en offentlig URL, betyder det, at billedet findes
     return data?.publicUrl !== null;
   };
 
@@ -324,7 +320,7 @@ export default function Admin() {
               date,
               needed_volunteers: neededVolunteers,
               address,
-              image_url: newEventImageUrl || null, // Hvis URL ikke findes, sæt den til null
+              image_url: newEventImageUrl || null,
             })
             .select("id")
             .single();
@@ -369,8 +365,8 @@ export default function Admin() {
 
             const updatedVolunteers = oldVolunteers.map((volunteer) => ({
               ...volunteer,
-              time_slot_id: timeSlotIdMap[volunteer.time_slot_id], // Opdater time_slot_id
-              task_id: newTask.id, // Opdater task_id
+              time_slot_id: timeSlotIdMap[volunteer.time_slot_id],
+              task_id: newTask.id,
             }));
 
             // Flyt tilmeldte til den nye tabel
@@ -406,7 +402,7 @@ export default function Admin() {
               date,
               needed_volunteers: neededVolunteers,
               address,
-              image_url: newEventImageUrl || null, // Hvis URL ikke findes, sæt den til null
+              image_url: newEventImageUrl || null,
             })
             .eq("id", id);
 
@@ -449,7 +445,7 @@ export default function Admin() {
             date,
             needed_volunteers: neededVolunteers,
             address,
-            image_url: newEventImageUrl || null, // Hvis URL ikke findes, sæt den til null
+            image_url: newEventImageUrl || null,
           })
           .select("id")
           .single();
@@ -544,9 +540,9 @@ export default function Admin() {
     if (address) setAddress(address);
 
     if (type) {
-      console.log("Setting table type to:", type); // Debugging
+      console.log("Setting table type to:", type);
       setTableSelection(type); // Sæt tabel baseret på `type`
-      setOriginalTable(type); // Også gem den originale tabel
+      setOriginalTable(type); //  gem den originale tabel
     }
   }, [router.query, type]);
 
@@ -600,7 +596,7 @@ export default function Admin() {
     const imageUrl = urlParams.get("image_url");
     const slugParam = urlParams.get("slug");
 
-    // Hvis der er et eventId, kan vi formode at vi er i editMode
+    // Hvis der er et eventId, er vi i editMode
     if (eventId) {
       setEditMode(true);
     }
@@ -609,7 +605,7 @@ export default function Admin() {
     setNewEventName(friendlyName || "");
     setNewEventDate(eventDate || "");
     setNewEventDescription(eventDescription || "");
-    setNewEventlongDescription(eventLongDescription || ""); // Sæt lang beskrivelse, hvis det er nødvendigt
+    setNewEventlongDescription(eventLongDescription || "");
     setNewEventImageUrl(imageUrl || "");
     setAddress(addressParam || "");
     setSlug(slugParam || "");
@@ -630,7 +626,7 @@ export default function Admin() {
         // Filtrer tabeller, der starter med 'opgaver'
         const eventTables = tablesData.map((table) => table.tablename).filter((name) => name.startsWith("opgaver"));
 
-        // Gennemgå hver tabel og prøv at finde eventet ved ID
+        // find eventet ved ID
         let eventFound = false;
         for (let table of eventTables) {
           const { data, error } = await supabase
@@ -649,10 +645,9 @@ export default function Admin() {
                 event_description: newEventDescription,
                 event_longdescription: newEventlongDescription,
                 address: address,
-                image_url: newEventImageUrl, // Hvis nødvendigt
+                image_url: newEventImageUrl,
               })
-              .eq("id", eventId); // Brug id for at finde den specifikke event
-
+              .eq("id", eventId);
             if (updateError) {
               setError("Fejl ved opdatering af event: " + updateError.message);
               return;
@@ -660,7 +655,7 @@ export default function Admin() {
 
             setSuccess("Event opdateret i tabellen " + table);
             eventFound = true;
-            break; // Eventet er opdateret, stop med at lede
+            break;
           }
         }
 
@@ -708,7 +703,6 @@ export default function Admin() {
                 >
                   {tableOptions.map(({ tablename, friendly_name }) => (
                     <option key={tablename} value={tablename}>
-                      {/* Vælg friendly_name hvis det findes, ellers brug tablename */}
                       {friendly_name ? friendly_name : tablename}
                     </option>
                   ))}
@@ -808,7 +802,6 @@ export default function Admin() {
                 <input type="file" accept="image/*" onChange={handleImageChange} className="w-full bg-knap-10 border border-gray-700 text-bono-10 rounded p-2" required />
               </label>
 
-              {/* Display URL of the uploaded image */}
               {newEventImageUrl && <p className="text-gray-500 mt-2">Billed-URL: {newEventImageUrl}</p>}
               <div className="flex flex-col">
                 <button type="button" onClick={handleUploadImage} className="btn btn-primary text-bono-10 font-semibold text-left">

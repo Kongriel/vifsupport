@@ -54,7 +54,7 @@ export default function TaskDetail({ isLoggedIn }) {
 
     console.log("Fetching task with ID:", id, "and type:", type);
 
-    const taskTable = type || "opgaver1"; // Default to "opgaver1"
+    const taskTable = type || "opgaver1";
     const timeSlotTable = type.startsWith("opgaver") ? `time_slots${type.replace("opgaver", "")}` : "time_slots"; // Dynamic time_slots table
     const volunteerTable = type.startsWith("opgaver") ? `tilmeldte${type.replace("opgaver", "")}` : "tilmeldte"; // Dynamic volunteer table
 
@@ -64,7 +64,6 @@ export default function TaskDetail({ isLoggedIn }) {
 
     setLoading(true);
     try {
-      // Query the task by ID, include 'address' column
       const { data: taskData, error: taskError } = await supabase.from(taskTable).select("*, address").eq("id", id).single();
 
       if (taskError) {
@@ -77,7 +76,6 @@ export default function TaskDetail({ isLoggedIn }) {
       console.log("Fetched task data:", taskData);
       setTask(taskData);
 
-      // Query volunteers
       const { data: volunteersData, error: volunteersError } = await supabase.from(volunteerTable).select("*").eq("task_id", id);
 
       if (volunteersError) {
@@ -88,7 +86,6 @@ export default function TaskDetail({ isLoggedIn }) {
         setVolunteers(volunteersData || []);
       }
 
-      // Query time slots
       const { data: timeSlotsData, error: timeSlotsError } = await supabase.from(timeSlotTable).select("*").eq("task_id", id);
 
       if (timeSlotsError) {
@@ -142,8 +139,8 @@ export default function TaskDetail({ isLoggedIn }) {
         return;
       }
 
-      // Insert the volunteer
-      const volunteerTable = type.startsWith("opgaver") ? `tilmeldte${type.replace("opgaver", "")}` : "tilmeldte"; // Dynamic volunteer table
+      // indsæt tilmeldte
+      const volunteerTable = type.startsWith("opgaver") ? `tilmeldte${type.replace("opgaver", "")}` : "tilmeldte";
 
       const { error: insertError } = await supabase.from(volunteerTable).insert([
         {
@@ -164,7 +161,7 @@ export default function TaskDetail({ isLoggedIn }) {
         return;
       }
 
-      // Update current_volunteers
+      // Update tilmeldte
       await supabase
         .from(timeSlotTable)
         .update({ current_volunteers: timeSlot.current_volunteers + 1 })
@@ -181,7 +178,7 @@ export default function TaskDetail({ isLoggedIn }) {
 
       fetchTaskData();
 
-      // Reset form fields
+      // Reset form felter
       setName("");
       setEmail("");
       setPhone("");

@@ -15,7 +15,7 @@ export default function Tasks() {
   const [tasksNeedingVolunteers, setTasksNeedingVolunteers] = useState(0);
   const [displayVolunteers, setDisplayVolunteers] = useState(0);
   const [displayTasks, setDisplayTasks] = useState(0);
-  const [isLoading, setIsLoading] = useState(true); // Ny tilstand for indlæsning
+  const [isLoading, setIsLoading] = useState(true);
 
   const router = useRouter();
   const { slug } = router.query;
@@ -28,7 +28,7 @@ export default function Tasks() {
   };
 
   const handleDragOver = (e) => {
-    e.preventDefault(); // Tillader drop
+    e.preventDefault();
   };
   const handleDrop = async (e, droppedIndex) => {
     e.preventDefault();
@@ -139,7 +139,7 @@ export default function Tasks() {
       } catch (err) {
         console.error("Fejl ved hentning af event og opgaver:", err);
       } finally {
-        setIsLoading(false); // Stop loading
+        setIsLoading(false);
       }
     };
 
@@ -226,7 +226,7 @@ export default function Tasks() {
           return prev;
         }
       });
-    }, 50); // Hver 50ms opdateres værdien
+    }, 50);
 
     let taskCounter = 0;
     const taskInterval = setInterval(() => {
@@ -239,7 +239,7 @@ export default function Tasks() {
           return prev;
         }
       });
-    }, 80); // Hver 80ms opdateres værdien
+    }, 80);
 
     return () => {
       clearInterval(volunteerInterval);

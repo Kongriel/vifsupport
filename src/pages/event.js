@@ -66,7 +66,7 @@ export default function EventPage() {
         console.error("Fejl ved hentning af events:", err);
         setError("Kunne ikke hente events.");
       } finally {
-        setIsLoading(false); // Stop loading state
+        setIsLoading(false);
       }
     };
 
