@@ -93,7 +93,7 @@ export default function Tasks() {
     if (!slug) return;
 
     const fetchEventAndTasks = async () => {
-      setIsLoading(true); // Start loading
+      setIsLoading(true);
 
       try {
         const { data: tablesData, error: tablesError } = await supabase.rpc("get_public_tables");
@@ -332,8 +332,8 @@ export default function Tasks() {
         }
       `}</style>
       <Head>
-        <title>Event opgaver</title>
-        <meta name="description" content="Learn more about us on this page." />
+        <title>Event-info og opgaver</title>
+        <meta name="Event Info og Opgaver" content="Tjek Eventet og dens opgaver ud" />
       </Head>
 
       {isLoading ? (
@@ -400,15 +400,7 @@ export default function Tasks() {
               }
 
               return (
-                <div
-                  key={task.id}
-                  id={`task-${task.id}`}
-                  className="px-4 md:px-8 py-2 rounded"
-                  draggable={isLoggedIn} // Kun draggable, hvis logget ind
-                  onDragStart={isLoggedIn ? (e) => handleDragStart(e, index) : null}
-                  onDragOver={isLoggedIn ? (e) => handleDragOver(e) : null}
-                  onDrop={isLoggedIn ? (e) => handleDrop(e, index) : null}
-                >
+                <div key={task.id} id={`task-${task.id}`} className="px-4 md:px-8 py-2 rounded" draggable={isLoggedIn} onDragStart={isLoggedIn ? (e) => handleDragStart(e, index) : null} onDragOver={isLoggedIn ? (e) => handleDragOver(e) : null} onDrop={isLoggedIn ? (e) => handleDrop(e, index) : null}>
                   <div className="justify-between mt-2">
                     <p className="text-bono-10 -mb-1 md:mb-0 text-sm">
                       {task.signedUp} ud af {task.needed_volunteers} tilmeldte

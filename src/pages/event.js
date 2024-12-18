@@ -31,7 +31,7 @@ export default function EventPage() {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      setIsLoading(true); // Start loading state
+      setIsLoading(true);
       try {
         const { data: tablesData, error: tablesError } = await supabase.rpc("get_public_tables");
         if (tablesError) throw tablesError;
@@ -257,8 +257,8 @@ export default function EventPage() {
         }
       `}</style>
       <Head>
-        <title>Viffsupport Startside</title>
-        <meta name="description" content="Learn more about us on this page." />
+        <title>Event side</title>
+        <meta name="Eventside" content="Tjek kommende Events ud" />
       </Head>
       <div className="min-h-screen mt-20 md:px-12 px-4 overflow-x-hidden">
         <div className="flex flex-col items-center mt-24 justify-center">

@@ -49,7 +49,7 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
 
             {isLoggedIn ? (
               <Link className="" href="/">
-                <button onClick={handleLogout} className="bg-red-700 border border-red-800  text-white px-4 py-2 -mt-2 rounded hover:bg-red-600" aria-label="log ud">
+                <button onClick={handleLogout} className="bg-knap-10 text-bono-10 font-montserrat font-semibold px-5 border border-gray-500 py-2 text-sm hover:border-blue-600 -mt-2 rounded hover:bg-taupe-10" aria-label="log ud">
                   Log ud
                 </button>
               </Link>
@@ -78,13 +78,13 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
 
             {/* Navigation links */}
             <nav className="flex flex-col items-center space-y-4 py-7 px-6">
-              <Link href="/event" className="text-gray-300 py-1 text-4xl hover:text-blue-500" onClick={() => setMenuOpen(false)}>
-                Opgaver
+              <Link href="/event" className="text-taupe-10 py-1 text-4xl" onClick={() => setMenuOpen(false)}>
+                Events
               </Link>
-              <Link href="/about" className="text-gray-300 py-1 text-4xl hover:text-blue-500" onClick={() => setMenuOpen(false)}>
+              <Link href="/about" className="text-taupe-10 py-1 text-4xl" onClick={() => setMenuOpen(false)}>
                 Om os
               </Link>
-              <Link href="/admin" className="text-gray-300 py-1 text-4xl hover:text-blue-500" onClick={() => setMenuOpen(false)}>
+              <Link href="/admin" className="text-taupe-10 py-1 text-4xl" onClick={() => setMenuOpen(false)}>
                 Admin
               </Link>
             </nav>
@@ -92,12 +92,12 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
             {/* Login/Logout button */}
             <div className="mt-auto px-6 pb-6">
               {isLoggedIn ? (
-                <button onClick={handleLogout} className="bg-knap-10 text-bono-10 px-4 py-2 rounded hover:bg-red-600 w-full" aria-label="log ud">
+                <button onClick={handleLogout} className=" text-taupe-10 text-4xl px-4 py-2 rounded  w-full" aria-label="log ud">
                   Log ud
                 </button>
               ) : (
                 <Link href="/login">
-                  <button onClick={() => setMenuOpen(false)} className="bg-knap-10 text-bono-10 px-4 py-2 rounded hover:bg-blue-600 w-full" aria-label="login">
+                  <button onClick={() => setMenuOpen(false)} className=" text-taupe-10 text-4xl px-4 py-2 rounded w-full" aria-label="login">
                     Login
                   </button>
                 </Link>

@@ -167,7 +167,7 @@ export default function Admin() {
     console.log("newEventName:", newEventName);
     console.log("newEventDate:", newEventDate);
     console.log("newEventDescription:", newEventDescription);
-    console.log("newEventImageUrl:", newEventImageUrl); // Dette skal være URL'en, du fik efter upload
+    console.log("newEventImageUrl:", newEventImageUrl);
 
     // Tjek om alle nødvendige felter er udfyldt
     if (!newEventName || !newEventDate || !newEventDescription || !newEventImageUrl) {
@@ -176,7 +176,7 @@ export default function Admin() {
     }
 
     try {
-      let imageUrl = newEventImageUrl; // Vi bruger den URL, der blev opdateret efter billedeupload
+      let imageUrl = newEventImageUrl;
 
       // 2. Hent eksisterende tabeller og generér nye tabeller
       const { data: tablesData, error: tablesError } = await supabase.rpc("get_public_tables");
@@ -577,13 +577,10 @@ export default function Admin() {
         throw new Error("Fejl ved upload af billede: " + uploadError.message);
       }
 
-      // Byg den offentlige URL manuelt
       const imageUrl = `https://kuzyorqkbgxojqeeznfm.supabase.co/storage/v1/object/Photos/${filePath}`;
 
-      // Log den opbyggede URL for at sikre, at det fungerer
       console.log("Manuel URL:", imageUrl);
 
-      // Sæt den genererede URL i state
       setNewEventImageUrl(imageUrl);
       setError(null); // Ryd eventuel fejl
       setSuccess("Billede uploadet og URL genereret!");
