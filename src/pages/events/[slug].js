@@ -434,7 +434,7 @@ export default function Tasks() {
                     )}
                     <Link href={isPast || isFull ? "#" : `/tasks/${task.id}?type=${eventInfo.table_name}`}>
                       <button
-                        className={`group relative md:-mt-12 flex justify-center items-center w-full md:w-auto md:h-16 mt-2 h-10 max-w-[500px] px-24 rounded-2xl border-2 overflow-hidden ${isFull ? "bg-gray-400 text-gray-700 cursor-not-allowed border-gray-500" : "bg-knap-10 text-bono-10 border-gray-500 hover:border-blue-600"}`}
+                        className={`group relative md:-mt-12 flex justify-center items-center w-full md:w-auto md:h-16 mt-2 h-10 max-w-[500px] px-24 rounded-2xl border-2 overflow-hidden ${isFull ? "bg-knap-10 text-bono-10 cursor-not-allowed border-gray-500" : "bg-knap-10 text-bono-10 border-gray-500 hover:border-blue-600"}`}
                         onClick={(e) => {
                           if (isFull) e.preventDefault(); // Forhindre navigation, hvis ikke tilgængelig
                         }}
