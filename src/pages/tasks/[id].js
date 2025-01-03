@@ -3,10 +3,12 @@ import { useRouter } from "next/router";
 import { supabase } from "/lib/supabaseClient";
 import confetti from "canvas-confetti";
 import Head from "next/head";
+import Breadcrumb from "../components/Breadcrumb";
 
 export default function TaskDetail({ isLoggedIn }) {
   const router = useRouter();
   const { id, type } = router.query;
+  const { eventSlug } = router.query;
 
   const [task, setTask] = useState(null);
   const [volunteers, setVolunteers] = useState([]);
@@ -271,8 +273,11 @@ export default function TaskDetail({ isLoggedIn }) {
         <title>Opgavedetaljer</title>
         <meta name="description" content="Få information om opgaven. Se tidsrum, behovet for frivillige og tilmeld dig for at hjælpe med praktiske opgaver." />
       </Head>
-      <div className="md:p-16 mt-32 md:mt-12 min-h-screen ">
-        <h1 className="text-5xl text-center mt-7 font-bebas font-bold text-bono-10 md:mb-16 md:mt-8 mb-3">Opgave Detaljer</h1>
+      <div className="ml-16">
+        <Breadcrumb eventSlug={eventSlug} />
+      </div>
+      <div className="md:p-16 mt-32 md:mt-8 min-h-screen ">
+        <h1 className="text-5xl text-center mt-7 font-bebas font-bold text-bono-10 md:mb-16 md:mt-8 mb-3">Opgave Detaljer </h1>
         <div className="md:flex justify-evenly">
           <div className="flex p-6 flex-col md:flex-row justify-around gap-8 mb-8">
             <div className="flex-row max-w-2xl">

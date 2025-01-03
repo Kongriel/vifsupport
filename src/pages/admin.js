@@ -673,7 +673,7 @@ export default function Admin() {
   };
 
   if (!isLoggedIn) {
-    return null;
+    return <div className="text-center text-red-500 min-h-screen text-5xl font-semibold mt-36">Du er ikke logget ind. Log venligst ind for at få adgang.</div>;
   }
 
   return (
