@@ -9,7 +9,7 @@ export default function Home() {
         <meta name="description" content="Om os siden der fortæller hvem vi er" />
       </Head>
 
-      <main className="max-w-4xl mx-auto text-center px-4 mt-20 py-10">
+      <main className="max-w-4xl mx-auto text-center px-4 mt-8 py-10">
         <h1 className="text-4xl font-bebas font-bold text-bono-10 mb-6">Om Os</h1>
         <p className="text-lg text-bono-10 font-montserrat leading-relaxed mb-4">Velkommen til VIF Support – stedet, hvor fællesskab og frivillighed går hånd i hånd. Vi er her for at skabe de bedste oplevelser for både deltagere og frivillige. Uden jeres hjælp og gode humør kunne vi ikke få det hele til at lykkes!</p>
         <p className="text-lg text-bono-10 font-montserrat leading-relaxed mb-6">Vores mål er at gøre det nemt og overskueligt at finde frivillige opgaver, tilmelde sig arrangementer og være med til at løfte i flok. Sammen kan vi skabe velorganiserede og mindeværdige events, hvor alle føler sig velkomne.</p>

@@ -5,6 +5,22 @@ const Socials = () => {
     <div className="socials-wrapper">
       <h3 className="text-2xl font-bebas font-semibold text-bono-10 text-center mt-2 pb-4">Besøg os på</h3>
       <div className="flex justify-center  gap-5 mt-8 pb-4">
+        {/* web */}
+        <button onClick={() => (window.location.href = "https://www.valbyif.dkF")} className="relative bg-black w-14 h-14 flex items-center justify-center duration-200 hover:scale-105 rounded-full group" aria-label="Besøg os på nettet">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-world-www" className="duration-200 group-hover:scale-125">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M19.5 7a9 9 0 0 0 -7.5 -4a8.991 8.991 0 0 0 -7.484 4" />
+            <path d="M11.5 3a16.989 16.989 0 0 0 -1.826 4" />
+            <path d="M12.5 3a16.989 16.989 0 0 1 1.828 4" />
+            <path d="M19.5 17a9 9 0 0 1 -7.5 4a8.991 8.991 0 0 1 -7.484 -4" />
+            <path d="M11.5 21a16.989 16.989 0 0 1 -1.826 -4" />
+            <path d="M12.5 21a16.989 16.989 0 0 0 1.828 -4" />
+            <path d="M2 10l1 4l1.5 -4l1.5 4l1 -4" />
+            <path d="M17 10l1 4l1.5 -4l1.5 4l1 -4" />
+            <path d="M9.5 10l1 4l1.5 -4l1.5 4l1 -4" />
+          </svg>
+          <span className="absolute bottom-14 left-1/2 -translate-x-1/2 mb-2 text-xs text-white bg-black  px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200">Valbyif.dk</span>
+        </button>
         {/* Facebook */}
         <button onClick={() => (window.location.href = "https://www.facebook.com/ValbyIF")} className="relative bg-black w-14 h-14 flex items-center justify-center duration-200 hover:scale-105 rounded-full group" aria-label="Besøg os på Facebook">
           <svg fill="#ffffff" height="32px" width="32px" viewBox="-143 145 512 512" xmlns="http://www.w3.org/2000/svg" className="duration-200 group-hover:scale-125">
