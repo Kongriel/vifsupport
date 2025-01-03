@@ -274,7 +274,7 @@ export default function EventPage() {
         <title>Event side</title>
         <meta name="description" content="Se en oversigt over kommende events og bliv en del af fællesskabet ved at tilmelde dig som frivillig til spændende opgaver." />
       </Head>
-      <div className="min-h-screen mt-20 md:px-12 px-4 overflow-x-hidden">
+      <div className="min-h-screen mt-4 md:px-12 px-4 overflow-x-hidden">
         <div className="flex flex-col items-center mt-24 justify-center">
           <h1 className="text-customClamp md:mt-4 -mt-8 text-center font-bebas font-bold md:text-center text-bono-10 mb-16 md:mb-2">{targetDays !== null ? `${daysUntilNextEvent} Dage Til Næste Event!` : "Velkommen til Eventlisten"}</h1>
           <p className="font-montserrat md:font-semibold text-xl md:text-center text-center md:mt-0 -mt-10 mb-12 md:mb-24 max-w-[700px] text-bono-10">Bliv en del af fællesskabet! Tjek vores kommende events og gør en forskel som frivillig – vi glæder os til at se dig!</p>
