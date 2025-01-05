@@ -48,6 +48,9 @@ export default function Header({ isLoggedIn, setIsLoggedIn, eventSlug }) {
 
           {/* Navigation for desktop */}
           <nav className="hidden md:flex space-x-6">
+            <Link href="/" className="relative text-bono-10 font-montserrat font-semibold transition-all duration-200 before:content-[''] before:absolute before:bottom-2 before:left-0 before:h-[2px] before:w-0 before:bg-gray-700 hover:before:w-full before:transition-all before:duration-250">
+              Forside
+            </Link>
             <Link href="/event" className="relative text-bono-10 font-montserrat font-semibold transition-all duration-200 before:content-[''] before:absolute before:bottom-2 before:left-0 before:h-[2px] before:w-0 before:bg-gray-700 hover:before:w-full before:transition-all before:duration-250">
               Events
             </Link>
