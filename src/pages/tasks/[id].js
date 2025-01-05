@@ -225,6 +225,14 @@ export default function TaskDetail({ isLoggedIn }) {
     });
   };
 
+  const handleBack = () => {
+    if (typeof window !== "undefined" && window.history.length > 1) {
+      router.back(); // Gå tilbage til den forrige side
+    } else {
+      router.push("/"); // Hvis der ikke er en forrige side, gå til forsiden
+    }
+  };
+
   const formatDate = (dateString) => {
     const options = { day: "numeric", month: "long", year: "numeric" };
     return new Intl.DateTimeFormat("da-DK", options).format(new Date(dateString));
@@ -273,7 +281,15 @@ export default function TaskDetail({ isLoggedIn }) {
         <title>Opgavedetaljer</title>
         <meta name="description" content="Få information om opgaven. Se tidsrum, behovet for frivillige og tilmeld dig for at hjælpe med praktiske opgaver." />
       </Head>
-      <div className="ml-16">
+      <div className="md:hidden mt-16 -mb-20 pl-2">
+        <button onClick={handleBack} className="flex items-center space-x-2 text-black hover:text-blue-500">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          <span>Tilbage</span>
+        </button>
+      </div>
+      <div className="ml-16 hidden md:block">
         <Breadcrumb eventSlug={eventSlug} />
       </div>
       <div className="md:p-16 mt-32 md:mt-8 min-h-screen ">
@@ -318,13 +334,46 @@ export default function TaskDetail({ isLoggedIn }) {
                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Navn" className="block w-full bg-knap-10 text-bono-10 border border-gray-700 rounded p-2" required />
               </div>
               <div>
-                <label className=" text-bono-10">Email</label>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" className="block w-full bg-knap-10 text-bono-10 border border-gray-700 rounded p-2" required />
+                <label className="text-bono-10">Email</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onBlur={() => {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(email)) {
+                      alert("Indtast en gyldig e-mailadresse.");
+                    }
+                  }}
+                  placeholder="Email"
+                  className={`block w-full bg-knap-10 text-bono-10 border ${email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? "border-red-500" : "border-gray-700"} rounded p-2`}
+                  required
+                />
+                {email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && <p className="text-red-500 text-sm mt-1">Indtast en gyldig e-mailadresse.</p>}
               </div>
+
               <div>
                 <label className=" text-bono-10">Telefon nr</label>
-                <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Telefonnummer" className="block w-full bg-knap-10 text-bono-10 border border-gray-700 rounded p-2" required />
+                <input
+                  type="text"
+                  value={phone}
+                  onChange={(e) => {
+                    const sanitizedValue = e.target.value.replace(/[^+\d]/g, "");
+                    setPhone(sanitizedValue);
+                  }}
+                  onBlur={() => {
+                    const phoneRegex = /^(\+45)?[2-9]\d{7}$/;
+                    if (!phoneRegex.test(phone)) {
+                      alert("Indtast et gyldigt dansk telefonnummer");
+                    }
+                  }}
+                  placeholder="Telefonnummer"
+                  className={`block w-full bg-knap-10 text-bono-10 border ${phone && !/^(\+45)?[2-9]\d{7}$/.test(phone) ? "border-red-500" : "border-gray-700"} rounded p-2`}
+                  required
+                />
+                {phone && !/^(\+45)?[2-9]\d{7}$/.test(phone) && <p className="text-red-500 text-sm mt-1">Indtast et gyldigt dansk telefonnummer (med eller uden +45).</p>}
               </div>
+
               <div className="mt-4 flex gap-4">
                 <label className="inline-flex items-center">
                   <input type="radio" name="role" checked={isParent} onChange={() => setIsParent(true)} className="form-radio text-blue-500" />

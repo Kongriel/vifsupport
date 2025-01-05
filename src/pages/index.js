@@ -9,7 +9,7 @@ export default function Home() {
         <title>Viffsupport Startside</title>
         <meta name="description" content="Forsiden på VifSupport side" />
       </Head>
-      <div className="flex min-h-screen md:pl-6 md:mt-16 md:pr-6 flex-col md:flex-row items-center justify-center  ">
+      <div className="flex min-h-screen md:pl-6 mt-24 md:mt-16 md:pr-6 flex-col md:flex-row items-center justify-center  ">
         <div className="w-full md:-mt-4 -mt-40  md:w-1/2">
           <Image src="/forside.webp" alt="VIF Gymnastik" width={500} height={500} className="object-cover rounded-lg w-full h-auto" />
         </div>

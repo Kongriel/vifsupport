@@ -408,9 +408,10 @@ export default function Tasks() {
                     <p className="text-bono-10 -mb-1 md:mb-0 text-sm">
                       {task.signedUp} ud af {task.needed_volunteers} tilmeldte
                     </p>
-                    <h2 className="text-customClampMedium text-wrap font-bold text-gray-800">
-                      <a href={`/tasks/${task.id}?type=${eventInfo.table_name}`} className="hover:underline">
+                    <h2 className="text-customClampMedium text-wrap font-bold text-gray-800 relative">
+                      <a href={`/tasks/${task.id}?type=${eventInfo.table_name}`} className="relative group">
                         {task.title}
+                        <span className="absolute bottom-0 left-0 w-0 h-1 bg-gray-800 transition-all duration-200 group-hover:w-full" />
                       </a>
                     </h2>
                   </div>
