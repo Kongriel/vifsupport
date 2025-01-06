@@ -422,7 +422,7 @@ export default function Tasks() {
                     {isLoggedIn && (
                       <div className="flex gap-4 items-center md:pr-10 md:mb-0 mb-7 mt-2">
                         <div className="relative group md:-mt-14">
-                          <button onClick={() => handleToggleVisibility(task.id, task.ishidden)} className="px-4 py-2 flex items-center justify-center">
+                          <button onClick={() => handleToggleVisibility(task.id, task.ishidden)} className="px-4 py-2 flex items-center justify-center" aria-label="offentliggør opgave">
                             {task.ishidden ? (
                               // Åbent øje for offentliggør
                               <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none" className="w-8 h-8 duration-200 group-hover:scale-110">
@@ -438,7 +438,7 @@ export default function Tasks() {
                               </svg>
                             ) : (
                               // Lukket øje for skjul
-                              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 duration-200 group-hover:scale-110">
+                              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 duration-200 group-hover:scale-110" aria-label="skjul opgave">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                                 <g id="SVGRepo_iconCarrier">
@@ -464,6 +464,7 @@ export default function Tasks() {
                               handleDeleteTask();
                             }}
                             className="text-red-900 px-4 py-2 flex items-center justify-center"
+                            aria-label="slet opgave"
                           >
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8">
                               <g id="SVGRepo_bgCarrier" stroke-width="0"></g>

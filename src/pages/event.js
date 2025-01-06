@@ -327,7 +327,7 @@ export default function EventPage() {
                       {isLoggedIn && (
                         <div className="flex items-center md:px-2 mb-5 mt-4 gap-3">
                           <div className="relative group">
-                            <button onClick={() => handleEditEvent(event)} className="btn text-bono-10 btn-edit py-2 flex items-center justify-center">
+                            <button onClick={() => handleEditEvent(event)} className="btn text-bono-10 btn-edit py-2 flex items-center justify-center" aria-label="rediger event">
                               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -343,7 +343,7 @@ export default function EventPage() {
                           </div>
 
                           <div className="relative group">
-                            <button onClick={() => toggleVisibility(event)} className="px-4 py-2 flex items-center justify-center">
+                            <button onClick={() => toggleVisibility(event)} className="px-4 py-2 flex items-center justify-center" aria-label="offentliggør event">
                               {event.ishidden ? (
                                 // Åbent øje for offentliggør
                                 <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none" className="w-8 h-8 duration-200 group-hover:scale-110">
@@ -359,7 +359,7 @@ export default function EventPage() {
                                 </svg>
                               ) : (
                                 // Lukket øje for skjul
-                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 duration-200 group-hover:scale-110">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 duration-200 group-hover:scale-110" aria-label="skjul event">
                                   <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                   <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                                   <g id="SVGRepo_iconCarrier">
@@ -378,7 +378,7 @@ export default function EventPage() {
                           </div>
 
                           <div className="relative group cursor-pointer">
-                            <button onClick={() => handleDeleteEvent(event)} className="text-red-700 px-0 py-2 flex items-center justify-center">
+                            <button onClick={() => handleDeleteEvent(event)} className="text-red-700 px-0 py-2 flex items-center justify-center" aria-label="slet event">
                               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>

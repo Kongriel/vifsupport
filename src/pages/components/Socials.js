@@ -2,8 +2,8 @@ import React from "react";
 
 const Socials = () => {
   return (
-    <div className="socials-wrapper">
-      <h3 className="text-2xl font-bebas font-semibold text-bono-10 text-center mt-2 pb-4">Besøg os på</h3>
+    <div className="socials-wrapper print:hidden">
+      <h2 className="text-2xl font-bebas font-semibold text-bono-10 text-center mt-2 pb-4">Besøg os på</h2>
       <div className="flex justify-center  gap-5 mt-8 pb-4">
         {/* web */}
         <button onClick={() => (window.location.href = "https://www.valbyif.dk")} className="relative bg-black w-14 h-14 flex items-center justify-center duration-200 hover:scale-105 rounded-full group" aria-label="Besøg os på nettet">

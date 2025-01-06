@@ -314,10 +314,10 @@ export default function TaskDetail({ isLoggedIn }) {
               </ul>
               {isLoggedIn && (
                 <div className=" mt-12 flex gap-4 text-sm">
-                  <button onClick={handleCopyTask} className=" bg-taupe-10 border border-gray-700 print:hidden text-bono-10 px-4 py-2 rounded">
+                  <button onClick={handleCopyTask} className=" bg-taupe-10 border border-gray-700 print:hidden text-bono-10 px-4 py-2 rounded" aria-label="kopier opgave">
                     Kopier Opgave
                   </button>
-                  <button onClick={handleEditClick} className=" print:hidden border border-gray-700 text-bono-10 px-4 py-2 rounded">
+                  <button onClick={handleEditClick} className=" print:hidden border border-gray-700 text-bono-10 px-4 py-2 rounded" aria-label="rediger opgave">
                     Rediger Opgave
                   </button>
                 </div>
@@ -481,7 +481,7 @@ export default function TaskDetail({ isLoggedIn }) {
                 </table>
                 {isLoggedIn && (
                   <div className="flex print:hidden justify-start mt-6 group">
-                    <button onClick={() => window.print()} className="relative flex justify-center items-center w-40 h-12 px-6 rounded-xl border-2 overflow-hidden text-bono-10 bg-knap-10 border-gray-500 hover:border-blue-600">
+                    <button onClick={() => window.print()} className="relative flex justify-center items-center w-40 h-12 px-6 rounded-xl border-2 overflow-hidden text-bono-10 bg-knap-10 border-gray-500 hover:border-blue-600" aria-label="print side">
                       {/* Primær tekst */}
                       <span className="absolute top-1/2 left-0 right-0 text-center transform -translate-y-1/2 transition-all duration-200 ease-in-out group-hover:-translate-y-[250%] text-lg md:text-xl font-bold">Print Tabel</span>
                       {/* Sekundær tekst */}
