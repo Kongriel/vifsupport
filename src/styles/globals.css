@@ -97,16 +97,3 @@ body {
   transition: all 0.5s;
   transform: rotateY(-90deg);
 }
-
-@keyframes lift-lid {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-6px);
-  }
-}
-
-.animate-lift-lid {
-  animation: lift-lid 0.3s ease-in-out forwards;
-}
