@@ -359,7 +359,7 @@ export default function Tasks() {
           </div>
           <div className="p-7 -mb-8 text-left">
             <p className="text-gray-700 font-bold md:text-lg pt-1 mb-2 text-sm">{formatDate(eventInfo.event_date)}</p>
-            <h1 className="text-gray-700 mb-2 font-bold text-customClampMedium">{eventInfo.friendly_name}</h1>
+            <h1 className="text-gray-700 mb-2 font-bold  break-words max-w-[600px] text-customClampMedium">{eventInfo.friendly_name}</h1>
 
             <p className="text-bono-10 mb-2 font-montserrat md:mt-3 break-words max-w-[600px]">{eventInfo.event_longdescription}</p>
             <p className="text-bono-10 mb-2">
